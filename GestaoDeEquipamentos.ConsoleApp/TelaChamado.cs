@@ -24,6 +24,7 @@ namespace GestaoDeEquipamentos.ConsoleApp
             Console.WriteLine("2 - Edição de Chamado");
             Console.WriteLine("3 - Exclusão de Chamado");
             Console.WriteLine("4 - Visualização de Chamados");
+            Console.WriteLine("5 - Voltar");
             Console.WriteLine("--------------------------------------------");
             Console.Write("Escolha uma opção: ");
             return Console.ReadLine();

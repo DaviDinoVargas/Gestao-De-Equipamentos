@@ -20,6 +20,8 @@ namespace GestaoDeEquipamentos.ConsoleApp
                 {
                     case "1":
                         string opcaoEquipamento = telaEquipamento.ApresentarMenu();
+                        if (opcaoEquipamento == "5")
+                            break;
 
                         switch (opcaoEquipamento)
                         {
@@ -32,6 +34,8 @@ namespace GestaoDeEquipamentos.ConsoleApp
 
                     case "2":
                         string opcaoChamado = telaChamado.ApresentarMenu();
+                        if (opcaoChamado == "5")
+                            break;
 
                         switch (opcaoChamado)
                         {

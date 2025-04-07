@@ -17,6 +17,7 @@
             Console.WriteLine("2 - Edição de Equipamento");
             Console.WriteLine("3 - Exclusão de Equipamento");
             Console.WriteLine("4 - Visualização de Equipamentos");
+            Console.WriteLine("5 - Voltar");
             Console.WriteLine("--------------------------------------------");
 
             Console.Write("Digite um opção válida: ");
