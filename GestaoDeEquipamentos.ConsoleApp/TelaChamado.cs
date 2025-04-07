@@ -75,6 +75,29 @@ namespace GestaoDeEquipamentos.ConsoleApp
 
             Console.WriteLine("Chamado cadastrado com sucesso!");
         }
+        public void VisualizarChamados()
+        {
+            Console.Clear();
+            Console.WriteLine("Chamados Registrados");
+            Console.WriteLine("--------------------------------------------");
+
+            Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -15} | {4, -10}",
+                "Id", "Título", "Equipamento", "Abertura", "Dias Abertos");
+
+            for (int i = 0; i < chamados.Length; i++)
+            {
+                if (chamados[i] == null) continue;
+
+                Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -15} | {4, -10}",
+                    chamados[i].Id,
+                    chamados[i].Titulo,
+                    chamados[i].EquipamentoRelacionado.Nome,
+                    chamados[i].DataAbertura.ToShortDateString(),
+                    chamados[i].ObterDiasEmAberto());
+            }
+
+            Console.WriteLine();
+        }
 
     }
 }
