@@ -21,5 +21,12 @@ namespace GestaoDeEquipamentos.ConsoleApp
             PrecoAquisicao = precoAquisicao;
             DataFabricacao = dataFabricacao;
         }
+        public string ObterNumeroSerie()
+        {
+            string tresPrimeirosCaracteres = Nome.Substring(0, 3).ToUpper();
+
+            return $"{tresPrimeirosCaracteres}-{Id}";
+        }
+    
     }
 }
