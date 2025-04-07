@@ -8,7 +8,7 @@
 
             while (true)
             {
-                string opcaoEscolhida;
+                string opcaoEscolhida = telaEquipamento.ApresentarMenu();
 
                 switch (opcaoEscolhida)
                 {
