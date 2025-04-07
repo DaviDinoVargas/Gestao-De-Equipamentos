@@ -6,6 +6,7 @@
         {
             TelaEquipamento telaEquipamento = new TelaEquipamento();
 
+
             while (true)
             {
                 string opcaoEscolhida = telaEquipamento.ApresentarMenu();
