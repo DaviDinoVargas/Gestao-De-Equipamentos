@@ -1,42 +1,53 @@
-﻿namespace GestaoDeEquipamentos.ConsoleApp
+﻿using System;
+
+namespace GestaoDeEquipamentos.ConsoleApp
 {
     internal class Program
     {
         static void Main(string[] args)
         {
             TelaEquipamento telaEquipamento = new TelaEquipamento();
-
+            TelaChamado telaChamado = new TelaChamado(telaEquipamento);
 
             while (true)
             {
-                string opcaoEscolhida = telaEquipamento.ApresentarMenu();
+                string opcaoPrincipal = ObterOpcaoPrincipal();
 
-                switch (opcaoEscolhida)
+                if (opcaoPrincipal.ToUpper() == "S")
+                    break;
+
+                switch (opcaoPrincipal)
                 {
                     case "1":
-                        telaEquipamento.CadastrarEquipamento();
+                        string opcaoEquipamento = telaEquipamento.ApresentarMenu();
+
+                        switch (opcaoEquipamento)
+                        {
+                            case "1": telaEquipamento.CadastrarEquipamento(); break;
+                            case "2": telaEquipamento.EditarEquipamento(); break;
+                            case "3": telaEquipamento.ExcluirEquipamento(); break;
+                            case "4": telaEquipamento.VisualizarEquipamentos(true); break;
+                        }
                         break;
 
                     case "2":
-                        telaEquipamento.EditarEquipamento();
-                        break;
+                        string opcaoChamado = telaChamado.ApresentarMenu();
 
-                    case "3":
-                        telaEquipamento.ExcluirEquipamento();
-                        break;
-
-                    case "4":
-                        telaEquipamento.VisualizarEquipamentos(true);
-                        break;
-
-                    default:
-                        Console.WriteLine("Saindo do programa...");
+                        switch (opcaoChamado)
+                        {
+                            case "1": telaChamado.CadastrarChamado(); break;
+                            case "2": telaChamado.EditarChamado(); break;
+                            case "3": telaChamado.ExcluirChamado(); break;
+                            case "4": telaChamado.VisualizarChamados(); break;
+                        }
                         break;
                 }
-
-                Console.ReadLine();
             }
+        }
 
+        static string ObterOpcaoPrincipal()
+        {
+            return MenuPrincipal.Exibir();
         }
     }
 }
