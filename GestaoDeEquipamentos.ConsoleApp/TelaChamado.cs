@@ -29,5 +29,52 @@ namespace GestaoDeEquipamentos.ConsoleApp
             return Console.ReadLine();
         }
 
+        public void CadastrarChamado()
+        {
+            Console.Clear();
+            Console.WriteLine("Cadastro de Chamado");
+            Console.WriteLine("--------------------------------------------");
+
+            Console.Write("Digite o título do chamado: ");
+            string titulo = Console.ReadLine();
+
+            Console.Write("Digite a descrição do chamado: ");
+            string descricao = Console.ReadLine();
+
+            telaEquipamento.VisualizarEquipamentos(false);
+
+            Console.Write("Digite o ID do equipamento relacionado: ");
+            int idEquipamento = Convert.ToInt32(Console.ReadLine());
+
+            Equipamento equipamentoSelecionado = null;
+
+            for (int i = 0; i < telaEquipamento.equipamentos.Length; i++)
+            {
+                if (telaEquipamento.equipamentos[i] == null) continue;
+
+                if (telaEquipamento.equipamentos[i].Id == idEquipamento)
+                {
+                    equipamentoSelecionado = telaEquipamento.equipamentos[i];
+                    break;
+                }
+            }
+
+            if (equipamentoSelecionado == null)
+            {
+                Console.WriteLine("Equipamento não encontrado!");
+                return;
+            }
+
+            Console.Write("Digite a data de abertura (dd/MM/yyyy): ");
+            DateTime dataAbertura = Convert.ToDateTime(Console.ReadLine());
+
+            Chamado novoChamado = new Chamado(titulo, descricao, equipamentoSelecionado, dataAbertura);
+            novoChamado.Id = GeradorIds.GerarIdEquipamento();
+
+            chamados[contadorChamados++] = novoChamado;
+
+            Console.WriteLine("Chamado cadastrado com sucesso!");
+        }
+
     }
 }
