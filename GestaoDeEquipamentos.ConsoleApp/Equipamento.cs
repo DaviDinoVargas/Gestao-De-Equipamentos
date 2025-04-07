@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace GestaoDeEquipamentos.ConsoleApp
 {
-    class Equipamento
+    public class Equipamento
     {
         public int Id;
         public string Nome;

@@ -13,7 +13,7 @@
                 switch (opcaoEscolhida)
                 {
                     case "1":
-                      
+                        telaEquipamento.CadastrarEquipamento();
                         break;
 
                     case "2":
