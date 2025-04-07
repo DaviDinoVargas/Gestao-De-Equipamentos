@@ -1,10 +1,11 @@
-﻿using System;
+﻿using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestaoDeEquipamentos.ConsoleApp
+namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
 {
     class Chamado
     {

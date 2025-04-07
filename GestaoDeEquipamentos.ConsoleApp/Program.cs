@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
+using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
+using System;
 
 namespace GestaoDeEquipamentos.ConsoleApp
 {

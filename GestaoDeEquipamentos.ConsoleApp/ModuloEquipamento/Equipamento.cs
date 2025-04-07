@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace GestaoDeEquipamentos.ConsoleApp
+namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
 {
     public class Equipamento
     {
