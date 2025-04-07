@@ -98,6 +98,102 @@ namespace GestaoDeEquipamentos.ConsoleApp
 
             Console.WriteLine();
         }
+        public void EditarChamado()
+        {
+            Console.Clear();
+            Console.WriteLine("Editar Chamado");
+            Console.WriteLine("--------------------------------------------");
+
+            VisualizarChamados();
+
+            Console.Write("Digite o ID do chamado a ser editado: ");
+            int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 0; i < chamados.Length; i++)
+            {
+                if (chamados[i] == null) continue;
+
+                if (chamados[i].Id == idSelecionado)
+                {
+                    Console.Write("Novo título: ");
+                    chamados[i].Titulo = Console.ReadLine();
+
+                    Console.Write("Nova descrição: ");
+                    chamados[i].Descricao = Console.ReadLine();
+
+                    telaEquipamento.VisualizarEquipamentos(false);
+                    Console.Write("Novo ID de equipamento: ");
+                    int idEquip = Convert.ToInt32(Console.ReadLine());
+
+                    for (int j = 0; j < telaEquipamento.equipamentos.Length; j++)
+                    {
+                        if (telaEquipamento.equipamentos[j] == null) continue;
+
+                        if (telaEquipamento.equipamentos[j].Id == idEquip)
+                        {
+                            chamados[i].EquipamentoRelacionado = telaEquipamento.equipamentos[j];
+                            break;
+                        }
+                    }
+
+                    Console.Write("Nova data de abertura (dd/MM/yyyy): ");
+                    chamados[i].DataAbertura = Convert.ToDateTime(Console.ReadLine());
+
+                    Console.WriteLine("Chamado atualizado com sucesso!");
+                    return;
+                }
+            }
+
+            Console.WriteLine("Chamado não encontrado.");
+        }
+        public void EditarChamado()
+        {
+            Console.Clear();
+            Console.WriteLine("Editar Chamado");
+            Console.WriteLine("--------------------------------------------");
+
+            VisualizarChamados();
+
+            Console.Write("Digite o ID do chamado a ser editado: ");
+            int idSelecionado = Convert.ToInt32(Console.ReadLine());
+
+            for (int i = 0; i < chamados.Length; i++)
+            {
+                if (chamados[i] == null) continue;
+
+                if (chamados[i].Id == idSelecionado)
+                {
+                    Console.Write("Novo título: ");
+                    chamados[i].Titulo = Console.ReadLine();
+
+                    Console.Write("Nova descrição: ");
+                    chamados[i].Descricao = Console.ReadLine();
+
+                    telaEquipamento.VisualizarEquipamentos(false);
+                    Console.Write("Novo ID de equipamento: ");
+                    int idEquip = Convert.ToInt32(Console.ReadLine());
+
+                    for (int j = 0; j < telaEquipamento.equipamentos.Length; j++)
+                    {
+                        if (telaEquipamento.equipamentos[j] == null) continue;
+
+                        if (telaEquipamento.equipamentos[j].Id == idEquip)
+                        {
+                            chamados[i].EquipamentoRelacionado = telaEquipamento.equipamentos[j];
+                            break;
+                        }
+                    }
+
+                    Console.Write("Nova data de abertura (dd/MM/yyyy): ");
+                    chamados[i].DataAbertura = Convert.ToDateTime(Console.ReadLine());
+
+                    Console.WriteLine("Chamado atualizado com sucesso!");
+                    return;
+                }
+            }
+
+            Console.WriteLine("Chamado não encontrado.");
+        }
 
     }
 }
