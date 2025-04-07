@@ -163,6 +163,7 @@
 
                 Console.WriteLine("Visualizando Equipamentos...");
                 Console.WriteLine("--------------------------------------------");
+                Console.ReadLine();
             }
 
             Console.WriteLine();
@@ -181,10 +182,11 @@
                 Console.WriteLine(
                     "{0, -10} | {1, -15} | {2, -11} | {3, -15} | {4, -15} | {5, -10}",
                     e.Id, e.Nome, e.ObterNumeroSerie(), e.Fabricante, e.PrecoAquisicao.ToString("C2"), e.DataFabricacao.ToShortDateString()
+
                 );
             }
 
-            Console.WriteLine();
+            Console.ReadLine();
         }
     }
 }

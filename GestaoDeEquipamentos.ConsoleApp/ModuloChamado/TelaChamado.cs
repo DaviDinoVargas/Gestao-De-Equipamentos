@@ -82,6 +82,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
             Console.Clear();
             Console.WriteLine("Chamados Registrados");
             Console.WriteLine("--------------------------------------------");
+            Console.ReadLine();
 
             Console.WriteLine("{0, -5} | {1, -20} | {2, -20} | {3, -15} | {4, -10}",
                 "Id", "Título", "Equipamento", "Abertura", "Dias Abertos");
@@ -98,7 +99,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
                     chamados[i].ObterDiasEmAberto());
             }
 
-            Console.WriteLine();
+            Console.ReadLine();
         }
         public void EditarChamado()
         {
