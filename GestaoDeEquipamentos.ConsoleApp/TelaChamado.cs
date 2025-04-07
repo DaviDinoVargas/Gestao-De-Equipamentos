@@ -146,15 +146,15 @@ namespace GestaoDeEquipamentos.ConsoleApp
 
             Console.WriteLine("Chamado não encontrado.");
         }
-        public void EditarChamado()
+        public void ExcluirChamado()
         {
             Console.Clear();
-            Console.WriteLine("Editar Chamado");
+            Console.WriteLine("Excluir Chamado");
             Console.WriteLine("--------------------------------------------");
 
             VisualizarChamados();
 
-            Console.Write("Digite o ID do chamado a ser editado: ");
+            Console.Write("Digite o ID do chamado a ser excluído: ");
             int idSelecionado = Convert.ToInt32(Console.ReadLine());
 
             for (int i = 0; i < chamados.Length; i++)
@@ -163,31 +163,8 @@ namespace GestaoDeEquipamentos.ConsoleApp
 
                 if (chamados[i].Id == idSelecionado)
                 {
-                    Console.Write("Novo título: ");
-                    chamados[i].Titulo = Console.ReadLine();
-
-                    Console.Write("Nova descrição: ");
-                    chamados[i].Descricao = Console.ReadLine();
-
-                    telaEquipamento.VisualizarEquipamentos(false);
-                    Console.Write("Novo ID de equipamento: ");
-                    int idEquip = Convert.ToInt32(Console.ReadLine());
-
-                    for (int j = 0; j < telaEquipamento.equipamentos.Length; j++)
-                    {
-                        if (telaEquipamento.equipamentos[j] == null) continue;
-
-                        if (telaEquipamento.equipamentos[j].Id == idEquip)
-                        {
-                            chamados[i].EquipamentoRelacionado = telaEquipamento.equipamentos[j];
-                            break;
-                        }
-                    }
-
-                    Console.Write("Nova data de abertura (dd/MM/yyyy): ");
-                    chamados[i].DataAbertura = Convert.ToDateTime(Console.ReadLine());
-
-                    Console.WriteLine("Chamado atualizado com sucesso!");
+                    chamados[i] = null;
+                    Console.WriteLine("Chamado excluído com sucesso!");
                     return;
                 }
             }
