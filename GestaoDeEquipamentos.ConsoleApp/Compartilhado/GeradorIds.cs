@@ -10,6 +10,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
     {
         public static int IdEquipamentos = 0;
         public static int IdChamados = 0;
+        public static int IdFabricante = 0;
 
         public static int GerarIdEquipamento()
         {
@@ -17,12 +18,16 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
 
             return IdEquipamentos;
         }
-
         public static int GerarIdChamado()
         {
             IdChamados++;
 
             return IdChamados;
+        }public static int GerarIdFabricante()
+        {
+            IdFabricante++;
+
+            return IdFabricante;
         }
     }
 }
