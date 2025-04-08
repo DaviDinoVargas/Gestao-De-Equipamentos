@@ -112,19 +112,23 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
             if (exibirCabecalho)
                 ExibirCabecalho("Lista de Fabricantes");
 
-            Console.WriteLine("{0,-5} | {1,-20} | {2,-25} | {3,-15}", "ID", "Nome", "Email", "Telefone");
-            Console.WriteLine("-------------------------------------------------------------------------");
+            Console.WriteLine("{0,-5} | {1,-20} | {2,-25} | {3,-15} | {4,-10} ",
+                "ID", "Nome", "Email", "Telefone", "Equipamentos");
+            Console.WriteLine("-------------------------------------------------------------------------------------------");
 
             foreach (Fabricante fabricante in repositorioFabricante.SelecionarFabricantes())
             {
                 if (fabricante == null)
                     continue;
 
-                Console.WriteLine("{0,-5} | {1,-20} | {2,-25} | {3,-15}",
+                int qtdEquipamentos = repositorioFabricante.ObterQuantidadeEquipamentos(fabricante);
+
+                Console.WriteLine("{0,-5} | {1,-20} | {2,-25} | {3,-15} | {4,-10}",
                     fabricante.Id,
                     fabricante.Nome,
                     fabricante.Email,
-                    fabricante.Telefone);
+                    fabricante.Telefone,
+                    qtdEquipamentos);
             }
 
             if (exibirCabecalho)

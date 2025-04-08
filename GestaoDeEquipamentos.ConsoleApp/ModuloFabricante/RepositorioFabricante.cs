@@ -1,4 +1,5 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,26 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
     {
         public Fabricante[] fabricantes = new Fabricante[100];
         public int contadorFabricantes = 0;
+        private RepositorioEquipamento repositorioEquipamento;
+
+        public RepositorioFabricante(RepositorioEquipamento repositorioEquipamento)
+        {
+            this.repositorioEquipamento = repositorioEquipamento;
+        }
+        public int ObterQuantidadeEquipamentos(Fabricante fabricante)
+        {
+            int contador = 0;
+            foreach (Equipamento equipamento in repositorioEquipamento.SelecionarEquipamentos())
+            {
+                if (equipamento != null &&
+                    equipamento.Fabricante != null &&
+                    equipamento.Fabricante.Id == fabricante.Id)
+                {
+                    contador++;
+                }
+            }
+            return contador;
+        }
 
         public void CadastrarFabricante(Fabricante novoFabricante)
         {

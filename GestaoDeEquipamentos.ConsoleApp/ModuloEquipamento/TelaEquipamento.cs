@@ -10,10 +10,10 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
             public RepositorioEquipamento repositorioEquipamento;
             private RepositorioFabricante repositorioFabricante;
 
-            public TelaEquipamento(RepositorioFabricante repositorioFabricante)
+            public TelaEquipamento(RepositorioFabricante repositorioFabricante, RepositorioEquipamento repositorioEquipamento)
             {
                 this.repositorioFabricante = repositorioFabricante;
-                repositorioEquipamento = new RepositorioEquipamento();
+                this.repositorioEquipamento = repositorioEquipamento;
             }
             public string ApresentarMenu()
             {
@@ -56,9 +56,6 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
 
                 Console.Write("Digite o ID do fabricante: ");
                 int idFabricante = Convert.ToInt32(Console.ReadLine());
-
-                if (!Validador.ValidarIdFabricante(idFabricante, repositorioFabricante))
-                    return;
 
                 Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarFabricantePorId(idFabricante);
 
