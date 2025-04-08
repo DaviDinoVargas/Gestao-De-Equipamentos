@@ -1,4 +1,6 @@
-﻿using System;
+﻿using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
+using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -12,8 +14,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
         {
             if (repositorio.contadorFabricantes == 0)
             {
-                Console.WriteLine("\nErro: Não há fabricantes cadastrados!");
-                Console.WriteLine("Cadastre pelo menos um fabricante antes de continuar.");
+                Console.WriteLine("\nErro: Cadastre um fabricante primeiro!");
                 Console.ReadLine();
                 return false;
             }
@@ -34,15 +35,14 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
 
         public static bool ValidarIdFabricante(int id, RepositorioFabricante repositorio)
         {
-            foreach (var fabricante in repositorio.fabricantes)
+            Fabricante fabricante = repositorio.SelecionarFabricantePorId(id);
+            if (fabricante == null)
             {
-                if (fabricante != null && fabricante.Id == id)
-                    return true;
+                Console.WriteLine("\nErro: Fabricante não encontrado!");
+                Console.ReadLine();
+                return false;
             }
-
-            Console.WriteLine("\nErro: ID de fabricante inválido!");
-            Console.ReadLine();
-            return false;
+            return true;
         }
 
         public static bool ValidarIdEquipamento(int id, RepositorioEquipamento repositorio)
@@ -58,3 +58,4 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
             return false;
         }
     }
+}
