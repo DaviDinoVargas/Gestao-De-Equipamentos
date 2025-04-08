@@ -15,6 +15,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado
             Console.WriteLine("--------------------------------------------");
             Console.WriteLine("1 - Gestão de Equipamentos");
             Console.WriteLine("2 - Gestão de Chamados");
+            Console.WriteLine("3 - Gestão de Fabricantes(Cadastrar Primeiro)");
             Console.WriteLine("S - Sair");
             Console.WriteLine("--------------------------------------------");
             Console.Write("Escolha uma opção: ");
