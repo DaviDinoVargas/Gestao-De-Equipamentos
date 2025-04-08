@@ -1,31 +1,27 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
+namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
+
+public class Chamado
 {
-    class Chamado
+    public int Id;
+    public string Titulo;
+    public string Descricao;
+    public Equipamento Equipamento;
+    public DateTime DataAbertura;
+
+    public Chamado(string titulo, string descricao, Equipamento equipamento)
     {
-        public int Id;
-        public string Titulo;
-        public string Descricao;
-        public Equipamento EquipamentoRelacionado;
-        public DateTime DataAbertura;
+        Titulo = titulo;
+        Descricao = descricao;
+        Equipamento = equipamento;
+        DataAbertura = DateTime.Now;
+    }
 
-        public Chamado(string titulo, string descricao, Equipamento equipamento, DateTime dataAbertura)
-        {
-            Titulo = titulo;
-            Descricao = descricao;
-            EquipamentoRelacionado = equipamento;
-            DataAbertura = dataAbertura;
-        }
+    public int ObterTempoDecorrido()
+    {
+        TimeSpan diferencaTempo = DateTime.Now.Subtract(DataAbertura);
 
-        public int ObterDiasEmAberto()
-        {
-            return (DateTime.Now - DataAbertura).Days;
-        }
+        return diferencaTempo.Days;
     }
 }
