@@ -14,7 +14,7 @@ public class TelaChamado
         repositorioChamado = new RepositorioChamado();
     }
 
-    public char ApresentarMenu()
+    public String ApresentarMenu()
     {
         ExibirCabecalho();
 
@@ -30,7 +30,7 @@ public class TelaChamado
         Console.WriteLine();
 
         Console.Write("Escolha uma das opções: ");
-        char operacaoEscolhida = Convert.ToChar(Console.ReadLine()!);
+        String operacaoEscolhida = Console.ReadLine()!;
 
         return operacaoEscolhida;
     }

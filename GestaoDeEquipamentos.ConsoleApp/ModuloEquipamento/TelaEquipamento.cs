@@ -1,4 +1,5 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
 {
@@ -6,7 +7,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
     {
         public RepositorioEquipamento repositorioEquipamento;
 
-        public TelaEquipamento()
+        public TelaEquipamento(RepositorioFabricante repositorioFabricante)
         {
             repositorioEquipamento = new RepositorioEquipamento();
         }
@@ -58,6 +59,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
             Equipamento novoEquipamento = new Equipamento(nome, fabricante, precoAquisicao, dataFabricacao);
 
             repositorioEquipamento.CadastrarEquipamento(novoEquipamento);
+            Console.ReadLine();
         }
 
         public void EditarEquipamento()
@@ -128,6 +130,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
 
             Console.WriteLine();
             Console.WriteLine("O equipamento foi excluído com sucesso!");
+            Console.ReadLine();
         }
 
         public void VisualizarEquipamentos(bool exibirTitulo)
@@ -165,6 +168,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
             }
 
             Console.WriteLine();
+            Console.ReadLine();
         }
     }
 }

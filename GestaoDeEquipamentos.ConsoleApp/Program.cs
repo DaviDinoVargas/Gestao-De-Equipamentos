@@ -1,6 +1,7 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
 using GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
+using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 using System;
 
 namespace GestaoDeEquipamentos.ConsoleApp
@@ -9,8 +10,12 @@ namespace GestaoDeEquipamentos.ConsoleApp
     {
         static void Main(string[] args)
         {
-            TelaEquipamento telaEquipamento = new TelaEquipamento();
-            TelaChamado telaChamado = new TelaChamado(telaEquipamento);
+            RepositorioFabricante repositorioFabricante = new RepositorioFabricante();
+
+            TelaFabricante telaFabricante = new TelaFabricante(repositorioFabricante);
+            TelaEquipamento telaEquipamento = new TelaEquipamento(repositorioFabricante);
+            TelaChamado telaChamado = new TelaChamado(telaEquipamento.repositorioEquipamento);
+
 
             while (true)
             {
@@ -23,9 +28,6 @@ namespace GestaoDeEquipamentos.ConsoleApp
                 {
                     case "1":
                         string opcaoEquipamento = telaEquipamento.ApresentarMenu();
-                        if (opcaoEquipamento == "5")
-                            break;
-
                         switch (opcaoEquipamento)
                         {
                             case "1": telaEquipamento.CadastrarEquipamento(); break;
@@ -37,24 +39,44 @@ namespace GestaoDeEquipamentos.ConsoleApp
 
                     case "2":
                         string opcaoChamado = telaChamado.ApresentarMenu();
-                        if (opcaoChamado == "5")
-                            break;
-
                         switch (opcaoChamado)
                         {
                             case "1": telaChamado.CadastrarChamado(); break;
                             case "2": telaChamado.EditarChamado(); break;
                             case "3": telaChamado.ExcluirChamado(); break;
-                            case "4": telaChamado.VisualizarChamados(); break;
+                            case "4": telaChamado.VisualizarChamados(true); break;
                         }
+                        break;
+
+                    case "3":
+                        string opcaoFabricante = telaFabricante.ApresentarMenu();
+                        switch (opcaoFabricante)
+                        {
+                            case "1": telaFabricante.CadastrarFabricante(); break;
+                            case "2": telaFabricante.EditarFabricante(); break;
+                            case "3": telaFabricante.ExcluirFabricante(); break;
+                            case "4": telaFabricante.VisualizarFabricantes(); break;
+                            case "S": break;
+                            default: MostrarOpcaoInvalida(); break;
+                        }
+                        break;
+
+                    default:
+                        MostrarOpcaoInvalida();
                         break;
                 }
             }
-        }
 
-        static string ObterOpcaoPrincipal()
-        {
-            return MenuPrincipal.Exibir();
+            static string ObterOpcaoPrincipal()
+            {
+                return MenuPrincipal.Exibir();
+            }
+
+            static void MostrarOpcaoInvalida()
+            {
+                Console.WriteLine("Opção inválida! Pressione qualquer tecla para continuar...");
+                Console.ReadKey();
+            }
         }
     }
 }
