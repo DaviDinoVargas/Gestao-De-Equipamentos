@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
 {
@@ -46,6 +47,18 @@ namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
             string telefone = Console.ReadLine()!;
 
             Fabricante novoFabricante = new Fabricante(nome, email, telefone);
+
+            string erros = novoFabricante.Validar();
+
+            if (erros.Length > 0)
+            {
+                Notificador.ExibirMensagem(erros, ConsoleColor.Red);
+
+                CadastrarFabricante();
+
+                return;
+            }
+
             repositorioFabricante.CadastrarFabricante(novoFabricante);
 
             Console.WriteLine("\nFabricante cadastrado com sucesso!");
