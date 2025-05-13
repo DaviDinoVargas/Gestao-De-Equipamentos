@@ -1,4 +1,6 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos.ConsoleApp.Extensoes;
+using GestaoDeEquipamentos.ConsoleApp.Models;
 using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 using Microsoft.AspNetCore.Mvc;
 using System.Text;
@@ -11,18 +13,22 @@ namespace GestaoDeEquipamentos.ConsoleApp.Controllers
         [HttpGet("cadastrar")]
         public IActionResult ExibirFormularioCadastroFabricante()
         {
-            return View("Cadastrar");
+            CadastrarFabricanteViewModel cadastrarVM = new CadastrarFabricanteViewModel();
+
+            return View("Cadastrar", cadastrarVM);
         }
 
         [HttpPost("cadastrar")]
-        public IActionResult CadastrarFabricante(Fabricante novoFabricante)
+        public IActionResult CadastrarFabricante(CadastrarFabricanteViewModel cadastrarVM)
         {
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioFabricante repositorioFabricante = new RepositorioFabricanteEmArquivo(contextoDados);
 
+            Fabricante novoFabricante = cadastrarVM.ParaEntidade();
+
             repositorioFabricante.CadastrarRegistro(novoFabricante);
 
-            ViewBag.Mensagem = $"O registro \"{novoFabricante.Nome}\" foi cadastrado com sucesso!";
+            ViewBag.Mensagem = $"O registro \"{cadastrarVM.Nome}\" foi cadastrado com sucesso!";
 
             return View("Notificacao");
         }
@@ -35,19 +41,27 @@ namespace GestaoDeEquipamentos.ConsoleApp.Controllers
 
             Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(id);
 
-            return View("Editar", fabricanteSelecionado);
+            EditarFabricanteViewModel editarVM = new EditarFabricanteViewModel(
+                id,
+                fabricanteSelecionado.Nome,
+                fabricanteSelecionado.Email,
+                fabricanteSelecionado.Telefone
+                );
+
+            return View("Editar", editarVM);
         }
 
         [HttpPost("editar/{id:int}")]
-        public IActionResult EditarFabricante([FromRoute] int id, Fabricante fabricanteAtualizado
-    )
+        public IActionResult EditarFabricante([FromRoute] int id, EditarFabricanteViewModel editarVM)
         {
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioFabricante repositorioFabricante = new RepositorioFabricanteEmArquivo(contextoDados);
 
+            Fabricante fabricanteAtualizado = new Fabricante(editarVM.Nome, editarVM.Email, editarVM.Telefone);
+
             repositorioFabricante.EditarRegistro(id, fabricanteAtualizado);
 
-            ViewBag.Mensagem = $"O registro \"{fabricanteAtualizado.Nome}\" foi editado com sucesso!";
+            ViewBag.Mensagem = $"O registro \"{editarVM.Nome}\" foi editado com sucesso!";
 
             return View("Notificacao");
         }
@@ -60,9 +74,12 @@ namespace GestaoDeEquipamentos.ConsoleApp.Controllers
 
             Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(id);
 
-            ViewBag.Fabricante = fabricanteSelecionado;
+            ExcluirFabricanteViewModel excluirVM = new ExcluirFabricanteViewModel(
+                fabricanteSelecionado.Id,
+                fabricanteSelecionado.Nome
+                );
 
-            return View("Excluir");
+            return View("Excluir", excluirVM);
         }
         [HttpPost("excluir/{id:int}")]
         public IActionResult ExcluirFabricante([FromRoute] int id)
@@ -85,7 +102,9 @@ namespace GestaoDeEquipamentos.ConsoleApp.Controllers
 
             List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
 
-            return View("Visualizar", fabricantes);
+            VisualizarFabricantesViewModel visualizarVM = new VisualizarFabricantesViewModel(fabricantes);
+
+            return View("Visualizar", visualizarVM);
         }
     }
 }

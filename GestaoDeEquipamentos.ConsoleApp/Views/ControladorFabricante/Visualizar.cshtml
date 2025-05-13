@@ -1,6 +1,7 @@
-﻿@using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
+﻿@using GestaoDeEquipamentos.ConsoleApp.Models
+@using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
 
-@model List<Fabricante>;
+@model VisualizarFabricantesViewModel;
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -24,21 +25,25 @@
         </ul>
     </div>
     <div class="card-container">
-        @foreach (Fabricante f in Model)
-        {
-            <div class="card">
-                <div class="card-info">
-                    <h4>@f.Nome</h4>
-                    <p><strong>Telefone:</strong> @f.Telefone</p>
-                    <p><strong>Email:</strong> @f.Email</p> 
-                </div>
-
-                <div class="card-actions">
-                    <a class="btn-editar" href="/fabricantes/editar/@f.Id">Editar</a>
-                    <a class="btn-excluir" href="/fabricantes/excluir/@f.Id">Excluir</a>
-                </div>
-            </div>
-        }
+        <ul class="fabricantes-list">
+            @foreach (DetalhesFabricanteViewModel f in Model.Registros)
+            {
+                <li>
+                    <div class="card">
+                        <div class="card-info">
+                            <h4>@f.Nome</h4>
+                            <p><strong>Telefone:</strong> @f.Telefone</p>
+                            <p><strong>Email:</strong> @f.Email</p>
+                            <p class="descricao">@f.ToString()</p>
+                        </div>
+                        <div class="card-actions">
+                            <a class="btn-editar" href="/fabricantes/editar/@f.Id">Editar</a>
+                            <a class="btn-excluir" href="/fabricantes/excluir/@f.Id">Excluir</a>
+                        </div>
+                    </div>
+                </li>
+            }
+        </ul>
     </div>
 </body>
 </html>

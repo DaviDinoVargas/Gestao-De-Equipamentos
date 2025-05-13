@@ -1,8 +1,8 @@
-﻿@using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
-@{
+﻿@using GestaoDeEquipamentos.ConsoleApp.Models
+@using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
 
-    Fabricante fabricanteSelecionado = (Fabricante)ViewBag.Fabricante;
-}
+@model ExcluirFabricanteViewModel;
+
 
 <!DOCTYPE html>
 <html>
@@ -24,9 +24,9 @@
 
     <h3>Exclusão de Fabricante</h3>
 
-    <p>Você tem certeza que deseja excluir o registro "@fabricanteSelecionado.Nome"?</p>
+    <p>Você tem certeza que deseja excluir o registro "@Model.Nome"?</p>
 
-    <form action="/fabricantes/excluir/@fabricanteSelecionado.Id" method="post">
+    <form action="/fabricantes/excluir/@Model.Id" method="post">
         <button type="submit">Confirmar</button>
         <a href="/fabricantes/visualizar">Voltar</a>
     </form>

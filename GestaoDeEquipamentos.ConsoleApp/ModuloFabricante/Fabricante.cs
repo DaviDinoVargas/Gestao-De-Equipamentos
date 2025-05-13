@@ -74,8 +74,5 @@ public class Fabricante : EntidadeBase<Fabricante>
         Email = fabricanteEditado.Email;
         Telefone = fabricanteEditado.Telefone;
     }
-    public override string ToString()
-    {
-        return $"ID: {Id} | Nome: {Nome} | Email: {Email} | Telefone: {Telefone}";
-    }
+
 }
