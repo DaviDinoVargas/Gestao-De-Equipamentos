@@ -1,8 +1,6 @@
 ﻿@using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
 
-@{
-    Fabricante fabricanteSelecionado = (Fabricante)ViewBag.Fabricante;
-}
+@model Fabricante;
 
 <!DOCTYPE html>
 <html>
@@ -24,22 +22,22 @@
 
     <h3>Edição de Fabricante</h3>
 
-    <form action="/fabricantes/editar/@fabricanteSelecionado.Id" method="post">
+    <form action="/fabricantes/editar/@Model.Id" method="post">
         <label>Nome do Fabricante:</label>
         <br />
-        <input type="text" name="nome" value="@fabricanteSelecionado.Nome" />
+        <input type="text" name="nome" value="@Model.Nome" />
 
         <br />
 
         <label>Email do Fabricante:</label>
         <br />
-        <input type="text" name="email" value="@fabricanteSelecionado.Email" />
+        <input type="text" name="email" value="@Model.Email" />
 
         <br />
 
         <label>Telefone do Fabricante:</label>
         <br />
-        <input type="text" name="telefone" value="@fabricanteSelecionado.Telefone" />
+        <input type="text" name="telefone" value="@Model.Telefone" />
         <hr />
 
         <button type="submit">Gravar</button>

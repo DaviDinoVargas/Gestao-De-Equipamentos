@@ -1,8 +1,6 @@
 ﻿@using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
 
-@{
-    List<Fabricante> fabricantes = ViewBag.Fabricantes;
-}
+@model List<Fabricante>;
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -26,7 +24,7 @@
         </ul>
     </div>
     <div class="card-container">
-        @foreach (Fabricante f in fabricantes)
+        @foreach (Fabricante f in Model)
         {
             <div class="card">
                 <div class="card-info">

@@ -15,16 +15,10 @@ namespace GestaoDeEquipamentos.ConsoleApp.Controllers
         }
 
         [HttpPost("cadastrar")]
-        public IActionResult CadastrarFabricante(
-         [FromForm] string nome,
-         [FromForm] string email,
-         [FromForm] string telefone
-     )
+        public IActionResult CadastrarFabricante(Fabricante novoFabricante)
         {
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioFabricante repositorioFabricante = new RepositorioFabricanteEmArquivo(contextoDados);
-
-            Fabricante novoFabricante = new Fabricante(nome, email, telefone);
 
             repositorioFabricante.CadastrarRegistro(novoFabricante);
 
@@ -41,23 +35,15 @@ namespace GestaoDeEquipamentos.ConsoleApp.Controllers
 
             Fabricante fabricanteSelecionado = repositorioFabricante.SelecionarRegistroPorId(id);
 
-            ViewBag.Fabricante = fabricanteSelecionado;
-
-            return View("Editar");
+            return View("Editar", fabricanteSelecionado);
         }
 
         [HttpPost("editar/{id:int}")]
-        public IActionResult EditarFabricante(
-        [FromRoute] int id,
-        [FromForm] string nome,
-        [FromForm] string email,
-        [FromForm] string telefone
+        public IActionResult EditarFabricante([FromRoute] int id, Fabricante fabricanteAtualizado
     )
         {
             ContextoDados contextoDados = new ContextoDados(true);
             IRepositorioFabricante repositorioFabricante = new RepositorioFabricanteEmArquivo(contextoDados);
-
-            Fabricante fabricanteAtualizado = new Fabricante(nome, email, telefone);
 
             repositorioFabricante.EditarRegistro(id, fabricanteAtualizado);
 
@@ -99,9 +85,7 @@ namespace GestaoDeEquipamentos.ConsoleApp.Controllers
 
             List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
 
-            ViewBag.Fabricantes = fabricantes;
-
-            return View("Visualizar");
+            return View("Visualizar", fabricantes);
         }
     }
 }
