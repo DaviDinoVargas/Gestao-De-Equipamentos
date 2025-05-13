@@ -1,31 +1,59 @@
-﻿using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
+using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 
-namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado
+namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
+
+public class Chamado : EntidadeBase<Chamado>
 {
-    class Chamado
+    public string Titulo { get; set; }
+    public string Descricao { get; set; }
+    public Equipamento Equipamento { get; set; }
+    public DateTime DataAbertura { get; set; }
+    public int TempoDecorrido
     {
-        public int Id;
-        public string Titulo;
-        public string Descricao;
-        public Equipamento EquipamentoRelacionado;
-        public DateTime DataAbertura;
-
-        public Chamado(string titulo, string descricao, Equipamento equipamento, DateTime dataAbertura)
+        get
         {
-            Titulo = titulo;
-            Descricao = descricao;
-            EquipamentoRelacionado = equipamento;
-            DataAbertura = dataAbertura;
-        }
+            TimeSpan diferencaTempo = DateTime.Now.Subtract(DataAbertura);
 
-        public int ObterDiasEmAberto()
-        {
-            return (DateTime.Now - DataAbertura).Days;
+            return diferencaTempo.Days;
         }
+    }
+
+    public Chamado()
+    {
+    }
+
+    public Chamado(string titulo, string descricao, Equipamento equipamento) : this()
+    {
+        Titulo = titulo;
+        Descricao = descricao;
+        Equipamento = equipamento;
+        DataAbertura = DateTime.Now;
+    }
+
+    public override void AtualizarRegistro(Chamado chamadoAtualizado)
+    {
+        Titulo = chamadoAtualizado.Titulo;
+        Descricao = chamadoAtualizado.Descricao;
+        Equipamento = chamadoAtualizado.Equipamento;
+    }
+
+    public override string Validar()
+    {
+        string erros = "";
+
+        if (string.IsNullOrWhiteSpace(Titulo))
+            erros += "O campo 'Título' é obrigatório.\n";
+
+        if (Titulo.Length < 3)
+            erros += "O campo 'Título' precisa conter ao menos 3 caracteres.\n";
+
+        if (string.IsNullOrWhiteSpace(Descricao))
+            erros += "O campo 'Descrição' é obrigatório.\n";
+
+        if (Equipamento == null)
+            erros += "O campo 'Equipamento' é obrigatório.\n";
+
+        return erros;
     }
 }

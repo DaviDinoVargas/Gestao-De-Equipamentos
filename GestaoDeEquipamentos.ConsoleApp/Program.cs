@@ -1,60 +1,24 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.Compartilhado;
-using GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
-using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
-using System;
+using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
+using GestaoDeEquipamentos.ConsoleApp.Util;
+using System.Text;
 
-namespace GestaoDeEquipamentos.ConsoleApp
+namespace GestaoDeEquipamentos.ConsoleApp;
+
+class Program
 {
-    internal class Program
+    static void Main(string[] args)
     {
-        static void Main(string[] args)
-        {
-            TelaEquipamento telaEquipamento = new TelaEquipamento();
-            TelaChamado telaChamado = new TelaChamado(telaEquipamento);
+        // criar um servidor web
+        WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
 
-            while (true)
-            {
-                string opcaoPrincipal = ObterOpcaoPrincipal();
+        builder.Services.AddControllersWithViews();
 
-                if (opcaoPrincipal.ToUpper() == "S")
-                    break;
+        WebApplication app = builder.Build();
 
-                switch (opcaoPrincipal)
-                {
-                    case "1":
-                        string opcaoEquipamento = telaEquipamento.ApresentarMenu();
-                        if (opcaoEquipamento == "5")
-                            break;
+        app.UseRouting();
+        app.MapControllers();
 
-                        switch (opcaoEquipamento)
-                        {
-                            case "1": telaEquipamento.CadastrarEquipamento(); break;
-                            case "2": telaEquipamento.EditarEquipamento(); break;
-                            case "3": telaEquipamento.ExcluirEquipamento(); break;
-                            case "4": telaEquipamento.VisualizarEquipamentos(true); break;
-                        }
-                        break;
-
-                    case "2":
-                        string opcaoChamado = telaChamado.ApresentarMenu();
-                        if (opcaoChamado == "5")
-                            break;
-
-                        switch (opcaoChamado)
-                        {
-                            case "1": telaChamado.CadastrarChamado(); break;
-                            case "2": telaChamado.EditarChamado(); break;
-                            case "3": telaChamado.ExcluirChamado(); break;
-                            case "4": telaChamado.VisualizarChamados(); break;
-                        }
-                        break;
-                }
-            }
-        }
-
-        static string ObterOpcaoPrincipal()
-        {
-            return MenuPrincipal.Exibir();
-        }
+        app.Run();
     }
 }
