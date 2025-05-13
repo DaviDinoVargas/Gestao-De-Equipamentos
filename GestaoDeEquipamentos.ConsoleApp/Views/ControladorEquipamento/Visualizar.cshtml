@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Equipamentos Cadastrados";
+    List<GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento.Equipamento> equipamentos = ViewBag.Equipamentos;
+}
+<h2>Equipamentos Cadastrados</h2>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>Preço</th>
+            <th>Data de Fabricação</th>
+            <th>Fabricante</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var equipamento in equipamentos)
+        {
+            <tr>
+                <td>@equipamento.Id</td>
+                <td>@equipamento.Nome</td>
+                <td>@equipamento.PrecoAquisicao.ToString("C")</td>
+                <td>@equipamento.DataFabricacao.ToString("dd/MM/yyyy")</td>
+                <td>@equipamento.Fabricante?.Nome</td>
+                <td>
+                    <a href="/equipamentos/editar/@equipamento.Id">Editar</a> |
+                    <a href="/equipamentos/excluir/@equipamento.Id">Excluir</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
