@@ -1,0 +1,48 @@
+﻿@using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
+
+@{
+    Fabricante fabricanteSelecionado = (Fabricante)ViewBag.Fabricante;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Edição de Fabricante - Gestão de Equipamentos</title>
+</head>
+
+<body>
+    <h1>Gestão de Equipamentos</h1>
+
+    <hr />
+
+    <a href="/">Página Inicial</a> /
+    <a href="/fabricantes/cadastrar">Cadastrar Novo Fabricante</a> /
+    <a href="/fabricantes/visualizar">Visualizar Fabricantes</a>
+
+    <hr />
+
+    <h3>Edição de Fabricante</h3>
+
+    <form action="/fabricantes/editar/@fabricanteSelecionado.Id" method="post">
+        <label>Nome do Fabricante:</label>
+        <br />
+        <input type="text" name="nome" value="@fabricanteSelecionado.Nome" />
+
+        <br />
+
+        <label>Email do Fabricante:</label>
+        <br />
+        <input type="text" name="email" value="@fabricanteSelecionado.Email" />
+
+        <br />
+
+        <label>Telefone do Fabricante:</label>
+        <br />
+        <input type="text" name="telefone" value="@fabricanteSelecionado.Telefone" />
+        <hr />
+
+        <button type="submit">Gravar</button>
+    </form>
+</body>
+</html>
