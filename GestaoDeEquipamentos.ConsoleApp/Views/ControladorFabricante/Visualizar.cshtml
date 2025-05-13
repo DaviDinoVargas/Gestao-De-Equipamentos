@@ -4,32 +4,43 @@
     List<Fabricante> fabricantes = ViewBag.Fabricantes;
 }
 
-    <!DOCTYPE html>
-    <html lang="pt-br">
-    <head>
-        <meta charset="utf-8" />
-        <title>Visualização de Fabricantes - Gestão de Equipamentos</title>
-    </head>
-    <body>
-        <h1>Gestão de Equipamentos</h1>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <title>Visualização de Fabricantes - Gestão de Equipamentos</title>
+    <link rel="stylesheet" href="~/css/estilo.css" />
+    <link rel="stylesheet" href="~/css/estiloVisualizarFabricante.css" />
+</head>
+<body>
+    <div class="header-nav">
+        <div class="navbar">
+            <h1>Gestão de Equipamentos</h1>
+        </div>
+    </div>
 
-        <hr />
-
-        <a href="/">Página Inicial</a> /
-        <a href="/fabricantes/cadastrar">Cadastrar Novo Fabricante</a> /
-
-        <hr />
-
-        <h3>Visualização de Fabricantes</h3>
-
+    <div class="sidebar">
         <ul>
-            @foreach (Fabricante f in fabricantes)
-            {
-            <li>
-                @f.ToString() / <a href=\"/fabricantes/editar/@f.Id">Editar</a>
-                / <a href=\"/fabricantes/excluir/@f.Id">Excluir</a>
-            </li>
-            }
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/fabricantes/cadastrar">Cadastrar Novo Fabricante</a></li>
         </ul>
-    </body>
+    </div>
+    <div class="card-container">
+        @foreach (Fabricante f in fabricantes)
+        {
+            <div class="card">
+                <div class="card-info">
+                    <h4>@f.Nome</h4>
+                    <p><strong>Telefone:</strong> @f.Telefone</p>
+                    <p><strong>Email:</strong> @f.Email</p> 
+                </div>
+
+                <div class="card-actions">
+                    <a class="btn-editar" href="/fabricantes/editar/@f.Id">Editar</a>
+                    <a class="btn-excluir" href="/fabricantes/excluir/@f.Id">Excluir</a>
+                </div>
+            </div>
+        }
+    </div>
+</body>
 </html>

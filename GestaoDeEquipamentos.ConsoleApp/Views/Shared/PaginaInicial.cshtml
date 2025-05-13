@@ -1,31 +1,39 @@
 ﻿<!DOCTYPE html>
-<html>
-<!--Contém metadados (dados sobre os dados) da página HTML-->
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gestão de Equipamentos</title>
+    <link rel="stylesheet" href="~/css/estilo.css" />
 </head>
-
-<!--Contém o conteúdo da página HTML-->
 <body>
-    <h1>Gestão de Equipamentos</h1>
+    <header class="header-nav">
+        <div class="navbar">
+            <div class="nav-container">
+                <div class="hamburger-lines">
+                    <span class="line line1"></span>
+                    <span class="line line2"></span>
+                    <span class="line line3"></span>
+                </div>
+                    <h1>Gestão de Equipamentos</h1>
+                </div>
+            </div>
+    </header>
 
-    <hr />
+    <aside class="sidebar">
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/fabricantes/cadastrar">Cadastrar Novo Fabricante</a></li>
+            <li><a href="/equipamentos/cadastrar">Cadastrar Novo Equipamento</a></li>
+            <li><a href="/fabricantes/visualizar">Visualizar Fabricantes</a></li>
+            <li><a href="/equipamentos/visualizar">Visualizar Equipamentos</a></li>
+        </ul>
+    </aside>
 
-    <a href="/">Página Inicial</a> /
-
-    <hr />
-
-    <h3>Fabricantes</h3>
-
-    <!--Lista desordenada / bullet points-->
-    <ul>
-        <li><a href="/fabricantes/cadastrar">Cadastrar Novo Fabricante</a></li>
-        <li><a href="/fabricantes/visualizar">Visualizar Fabricantes</a></li>
-    </ul>
-    <ul>
-        <li><a href="/equipamentos/cadastrar">Cadastrar Novo Equipamento</a></li>
-        <li><a href="/equipamentos/visualizar">Gerenciar Equipamentos</a></li>
-    </ul>
+    <main>
+        <div class="content">
+            <h2>Bem-vindo à Gestão de Equipamentos!</h2>
+        </div>
+    </main>
 </body>
 </html>

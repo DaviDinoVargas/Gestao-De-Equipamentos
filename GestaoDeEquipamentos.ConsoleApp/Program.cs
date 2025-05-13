@@ -15,6 +15,7 @@ class Program
         builder.Services.AddControllersWithViews();
 
         WebApplication app = builder.Build();
+        app.UseStaticFiles();
 
         app.UseRouting();
         app.MapControllers();
