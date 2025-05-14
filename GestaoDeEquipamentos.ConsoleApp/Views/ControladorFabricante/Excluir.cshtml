@@ -5,30 +5,37 @@
 
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
-    <title>Exclusão de Fabricante - Gestão de Equipamentos</title>
+    <title>Excluir Fabricante - Gestão de Equipamentos</title>
+    <link rel="stylesheet" href="~/css/estilo.css" />
+    <link rel="stylesheet" href="~/css/estiloExcluirFabricante.css" />
 </head>
-
 <body>
-    <h1>Gestão de Equipamentos</h1>
+    <header class="header-nav">
+        <div class="navbar">
+            <h1>Gestão de Equipamentos</h1>
+        </div>
+    </header>
 
-    <hr />
+    <aside class="sidebar">
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/fabricantes/cadastrar">Cadastrar Novo Fabricante</a></li>
+            <li><a href="/fabricantes/visualizar">Visualizar Fabricantes</a></li>
+        </ul>
+    </aside>
 
-    <a href="/">Página Inicial</a> /
-    <a href="/fabricantes/cadastrar">Cadastrar Novo Fabricante</a> /
-    <a href="/fabricantes/visualizar">Visualizar Fabricantes</a>
-
-    <hr />
-
-    <h3>Exclusão de Fabricante</h3>
-
-    <p>Você tem certeza que deseja excluir o registro "@Model.Nome"?</p>
-
-    <form action="/fabricantes/excluir/@Model.Id" method="post">
-        <button type="submit">Confirmar</button>
-        <a href="/fabricantes/visualizar">Voltar</a>
-    </form>
+    <main>
+        <div class="content">
+            <h2>Exclusão de Fabricante</h2>
+            <p>Tem certeza que deseja excluir o fabricante <strong>@Model.Nome</strong>?</p>
+            <form method="post" action="/fabricantes/excluir/@Model.Id">
+                <button type="submit" class="btn">Confirmar Exclusão</button>
+                <a href="/fabricantes/visualizar" class="btn btn-secundario">Cancelar</a>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

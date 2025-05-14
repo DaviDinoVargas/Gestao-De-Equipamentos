@@ -1,89 +1,92 @@
-﻿
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
+﻿/* estilo.css */
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f2f5f7;
-    color: #333;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
 }
-
 
 .header-nav {
-    background-color: #ffffff;
-    width: 100%;
-    position: fixed;
-    top: 0;
-    left: 0;
-    z-index: 1;
-    box-shadow: 0 1px 4px rgba(146, 161, 176, 0.15);
-    padding: 10px;
+    background-color: #333;
+    color: white;
+    padding: 10px 20px;
 }
 
-.navbar {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 100%;
+.navbar h1 {
+    margin: 0;
 }
 
-    .navbar .logo h1 {
-        font-size: 1.8rem;
-        color: #0e2431;
-    }
-
-/* Sidebar */
 .sidebar {
+    width: 200px;
+    background-color: #222;
+    color: white;
+    height: 100vh;
     position: fixed;
-    top: 50px; 
-    left: 0;
-    width: 250px;
-    background-color: #ffffff;
-    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
-    padding: 20px 10px;
-    height: calc(100% - 70px);
+    padding-top: 20px;
 }
 
     .sidebar ul {
-        list-style: none;
+        list-style-type: none;
+        padding: 0;
     }
 
         .sidebar ul li {
-            margin-bottom: 20px;
+            margin: 10px 0;
         }
 
             .sidebar ul li a {
+                color: white;
                 text-decoration: none;
-                color: #0e2431;
-                font-weight: 500;
-                font-size: 1.1rem;
+                padding: 10px;
                 display: block;
-                padding: 10px 15px;
-                border-radius: 4px;
             }
 
                 .sidebar ul li a:hover {
-                    background-color: #f2f5f7;
-                    font-weight: bolder;
+                    background-color: #444;
                 }
 
 main {
-    margin-left: 270px;
+    margin-left: 220px;
     padding: 20px;
-    padding-top: 90px;
 }
 
-.content h2 {
-    font-size: 2rem;
-    color: #333;
-    margin-bottom: 10px;
+.content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
 }
 
-.content p {
-    font-size: 1.2rem;
-    color: #666;
+h2 {
+    margin-top: 0;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+label {
+    display: block;
+    font-weight: bold;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    box-sizing: border-box;
+}
+
+button.btn,
+a.btn {
+    background-color: #007bff;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-decoration: none;
+    cursor: pointer;
+    border-radius: 4px;
+    display: inline-block;
+    margin-top: 10px;
 }

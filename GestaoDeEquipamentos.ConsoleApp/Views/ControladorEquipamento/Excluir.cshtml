@@ -1,8 +1,10 @@
-﻿@{
-    var equipamento = ViewBag.Equipamento as GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento.Equipamento;
-}
+﻿@using GestaoDeEquipamentos.ConsoleApp.Models
+@using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
+
+@model EditarEquipamentoViewModel
+<link rel="stylesheet" href="~/css/estiloEquipamentos.css" />
 <h2>Excluir Equipamento</h2>
-<p>Tem certeza que deseja excluir o equipamento <strong>@equipamento.Nome</strong>?</p>
+<p>Tem certeza que deseja excluir o equipamento <strong>@Model.Nome</strong>?</p>
 <form method="post">
     <button type="submit">Confirmar Exclusão</button>
 </form>

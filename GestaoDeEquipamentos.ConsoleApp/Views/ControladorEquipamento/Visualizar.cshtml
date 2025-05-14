@@ -1,33 +1,52 @@
-﻿@{
-    ViewBag.Title = "Equipamentos Cadastrados";
-    List<GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento.Equipamento> equipamentos = ViewBag.Equipamentos;
-}
-<h2>Equipamentos Cadastrados</h2>
-<table>
-    <thead>
-        <tr>
-            <th>ID</th>
-            <th>Nome</th>
-            <th>Preço</th>
-            <th>Data de Fabricação</th>
-            <th>Fabricante</th>
-            <th>Ações</th>
-        </tr>
-    </thead>
-    <tbody>
-        @foreach (var equipamento in equipamentos)
-        {
-            <tr>
-                <td>@equipamento.Id</td>
-                <td>@equipamento.Nome</td>
-                <td>@equipamento.PrecoAquisicao.ToString("C")</td>
-                <td>@equipamento.DataFabricacao.ToString("dd/MM/yyyy")</td>
-                <td>@equipamento.Fabricante?.Nome</td>
-                <td>
-                    <a href="/equipamentos/editar/@equipamento.Id">Editar</a> |
-                    <a href="/equipamentos/excluir/@equipamento.Id">Excluir</a>
-                </td>
-            </tr>
-        }
-    </tbody>
-</table>
+﻿@using GestaoDeEquipamentos.ConsoleApp.Models
+@using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
+
+@model VisualizarEquipamentosViewModel;
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <title>Visualizar Equipamentos - Gestão de Equipamentos</title>
+    <link rel="stylesheet" href="~/css/estiloVisualizarFabricante.css" />
+</head>
+<body>
+    <header class="header-nav">
+        <div class="navbar">
+            <h1>Gestão de Equipamentos</h1>
+        </div>
+    </header>
+
+    <aside class="sidebar">
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/equipamentos/cadastrar">Cadastrar Novo Equipamento</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <div class="card-container">
+            <ul class="equipamentos-list">
+                @foreach (DetalhesEquipamentoViewModel e in Model.Registros)
+                {
+                    <li>
+                        <div class="card">
+                            <div class="card-info">
+                                <h4>@e.Nome</h4>
+                                <p><strong>ID:</strong> @e.Id</p>
+                                <p><strong>Preço:</strong> @e.PrecoAquisicao.ToString("C")</p>
+                                <p><strong>Data de Fabricação:</strong> @e.DataFabricacao.ToString("dd/MM/yyyy")</p>
+                                <p><strong>Fabricante:</strong> @e.Fabricante?.Nome</p>
+                            </div>
+                            <div class="card-actions">
+                                <a class="btn-editar" href="/equipamentos/editar/@e.Id">Editar</a>
+                                <a class="btn-excluir" href="/equipamentos/excluir/@e.Id">Excluir</a>
+                            </div>
+                        </div>
+                    </li>
+                }
+            </ul>
+        </div>
+    </main>
+</body>
+</html>

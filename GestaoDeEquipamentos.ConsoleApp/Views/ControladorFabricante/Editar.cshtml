@@ -4,44 +4,47 @@
 @model EditarFabricanteViewModel;
 
 <!DOCTYPE html>
-<html>
+<html lang="pt-br">
 <head>
     <meta charset="utf-8" />
-    <title>Edição de Fabricante - Gestão de Equipamentos</title>
+    <title>Editar Fabricante - Gestão de Equipamentos</title>
+    <link rel="stylesheet" href="~/css/estilo.css" />
+    <link rel="stylesheet" href="~/css/estiloEditarFabricante.css" />
 </head>
-
 <body>
-    <h1>Gestão de Equipamentos</h1>
+    <header class="header-nav">
+        <div class="navbar">
+            <h1>Gestão de Equipamentos</h1>
+        </div>
+    </header>
 
-    <hr />
+    <aside class="sidebar">
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/fabricantes/cadastrar">Cadastrar Novo Fabricante</a></li>
+            <li><a href="/fabricantes/visualizar">Visualizar Fabricantes</a></li>
+        </ul>
+    </aside>
 
-    <a href="/">Página Inicial</a> /
-    <a href="/fabricantes/cadastrar">Cadastrar Novo Fabricante</a> /
-    <a href="/fabricantes/visualizar">Visualizar Fabricantes</a>
-
-    <hr />
-
-    <h3>Edição de Fabricante</h3>
-
-    <form action="/fabricantes/editar/@Model.Id" method="post">
-        <label>Nome do Fabricante:</label>
-        <br />
-        <input type="text" name="nome" value="@Model.Nome" />
-
-        <br />
-
-        <label>Email do Fabricante:</label>
-        <br />
-        <input type="text" name="email" value="@Model.Email" />
-
-        <br />
-
-        <label>Telefone do Fabricante:</label>
-        <br />
-        <input type="text" name="telefone" value="@Model.Telefone" />
-        <hr />
-
-        <button type="submit">Gravar</button>
-    </form>
+    <main>
+        <div class="content">
+            <h2>Edição de Fabricante</h2>
+            <form method="post" action="/fabricantes/editar/@Model.Id">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" value="@Model.Nome" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="@Model.Email" required />
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="text" id="telefone" name="telefone" value="@Model.Telefone" required />
+                </div>
+                <button type="submit" class="btn">Salvar Alterações</button>
+            </form>
+        </div>
+    </main>
 </body>
 </html>

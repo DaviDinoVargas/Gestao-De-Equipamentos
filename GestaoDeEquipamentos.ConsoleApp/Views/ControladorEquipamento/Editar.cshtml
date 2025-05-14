@@ -1,21 +1,21 @@
-﻿@{
-    ViewBag.Title = "Editar Equipamento";
-    var equipamento = ViewBag.Equipamento as GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento.Equipamento;
-    List<GestaoDeEquipamentos.ConsoleApp.ModuloFabricante.Fabricante> fabricantes = ViewBag.Fabricantes;
-}
+﻿@using GestaoDeEquipamentos.ConsoleApp.Models
+@using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
+
+@model EditarEquipamentoViewModel;
+<link rel="stylesheet" href="~/css/estiloEquipamentos.css" />
 <h2>Editar Equipamento</h2>
 <form method="post">
     <label>Nome:</label>
-    <input name="nome" value="@equipamento.Nome" required />
+    <input name="nome" value="@Model.Nome" required />
     <label>Preço de Aquisição:</label>
-    <input name="precoAquisicao" value="@equipamento.PrecoAquisicao" type="number" step="0.01" required />
+    <input name="precoAquisicao" value="@Model.PrecoAquisicao" type="number" step="0.01" required />
     <label>Data de Fabricação:</label>
-    <input name="dataFabricacao" value="@equipamento.DataFabricacao.ToString("yyyy-MM-dd")" type="date" required />
+    <input name="dataFabricacao" value="@Model.DataFabricacao.ToString("yyyy-MM-dd")" type="date" required />
     <label>Fabricante:</label>
     <select name="fabricanteId" required>
-        @foreach (var fabricante in fabricantes)
+        @foreach (var fabricante in Model.Fabricantes)
         {
-            <option value="@fabricante.Id" @(fabricante.Id == equipamento.Fabricante.Id ? "selected" : "")>@fabricante.Nome</option>
+            <option value="@fabricante.Id" @(fabricante.Id == Model.FabricanteId ? "selected" : "")>@fabricante.Nome</option>
         }
     </select>
     <button type="submit">Salvar</button>
