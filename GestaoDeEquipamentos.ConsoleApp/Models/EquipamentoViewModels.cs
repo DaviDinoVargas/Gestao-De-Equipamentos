@@ -44,6 +44,10 @@ namespace GestaoDeEquipamentos.ConsoleApp.Models
 
         public int FabricanteId { get; set; }
         public int Id { get; set; }
+        public EditarEquipamentoViewModel()
+        {
+            Fabricantes = new List<Fabricante>();
+        }
 
         public EditarEquipamentoViewModel(int id, string nome, Fabricante fabricante, decimal precoAquisicao, DateTime dataFabricacao)
         {

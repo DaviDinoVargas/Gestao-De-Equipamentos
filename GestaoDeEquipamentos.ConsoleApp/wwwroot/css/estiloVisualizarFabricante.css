@@ -1,21 +1,33 @@
-﻿.content {
+﻿/* Visualizar estilizado */
+
+.content {
     margin-left: 20px;
     max-width: 850px;
+    padding: 20px;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
 
     .content h3 {
         margin-bottom: 20px;
-        font-size: 1.6rem;
+        font-size: 1.8rem;
+        color: var(--text-color);
+        font-weight: 600;
+        border-bottom: 1px solid #ddd;
+        padding-bottom: 10px;
     }
 
     .content a {
-        color: #0e2431;
+        color: var(--primary-color);
         text-decoration: none;
         font-weight: 600;
+        transition: color 0.2s ease;
     }
 
         .content a:hover {
             text-decoration: underline;
+            color: #0056b3;
         }
 
 ul.fabricantes-list {
@@ -24,21 +36,22 @@ ul.fabricantes-list {
 }
 
     ul.fabricantes-list li {
-        margin-bottom: 12px;
+        margin-bottom: 20px;
         font-size: 1rem;
+        color: #444;
     }
 
 hr {
-    margin: 20px 0;
+    margin: 30px 0;
     border: none;
     height: 1px;
-    background-color: #ddd;
+    background-color: #e0e0e0;
 }
 
 .card-container {
     display: flex;
     flex-direction: column;
-    gap: 15px;
+    gap: 20px;
     margin-top: 20px;
 }
 
@@ -46,15 +59,16 @@ hr {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #fff;
-    border-radius: 8px;
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.08);
-    padding: 15px 25px;
-    transition: transform 0.2s ease;
+    background-color: var(--card-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
+    padding: 20px 30px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
     .card:hover {
-        transform: scale(1.01);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
 .card-info {
@@ -63,34 +77,41 @@ hr {
 }
 
     .card-info h4 {
-        font-size: 1.3rem;
-        color: #0e2431;
-        margin-bottom: 8px;
+        font-size: 1.6rem;
+        color: var(--text-color);
+        margin-bottom: 2px;
+        font-weight: 600;
     }
 
     .card-info p {
-        color: #555;
+        color: #666;
         font-size: 0.95rem;
-        margin-bottom: 4px;
+        margin-bottom: 5px;
     }
 
 .card-actions {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
     .card-actions a {
         text-decoration: none;
-        padding: 8px 16px;
-        border-radius: 5px;
-        font-weight: bold;
+        padding: 10px 18px;
+        border-radius: var(--border-radius);
+        font-weight: 600;
         font-size: 0.95rem;
-        transition: background-color 0.3s ease;
-        color: white;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+        color: var(--white);
+        box-shadow: var(--shadow);
     }
 
+        .card-actions a:hover {
+            transform: scale(1.05);
+        }
+
     .card-actions .btn-editar {
-        background-color: #007bff;
+        background-color: var(--primary-color);
     }
 
         .card-actions .btn-editar:hover {

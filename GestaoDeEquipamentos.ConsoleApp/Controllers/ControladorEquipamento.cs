@@ -56,13 +56,21 @@ namespace GestaoDeEquipamentos.ConsoleApp.Controllers
 
             Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(id);
 
+            IRepositorioFabricante repositorioFabricante = new RepositorioFabricanteEmArquivo(contexto);
+
+            List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
+
+
             EditarEquipamentoViewModel editarVM = new EditarEquipamentoViewModel(
                 id,
                 equipamentoSelecionado.Nome,
-                equipamentoSelecionado.Fabricante,
+                equipamentoSelecionado.Fabricante, 
                 equipamentoSelecionado.PrecoAquisicao,
                 equipamentoSelecionado.DataFabricacao
-            );
+            )
+            {
+                Fabricantes = fabricantes 
+            };
 
             return View("Editar", editarVM);
         }
@@ -89,7 +97,6 @@ namespace GestaoDeEquipamentos.ConsoleApp.Controllers
             IRepositorioEquipamento repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contexto);
 
             Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(id);
-
             ExcluirEquipamentoViewModel excluirVM = new ExcluirEquipamentoViewModel(
                 equipamentoSelecionado.Id,
                 equipamentoSelecionado.Nome

@@ -1,34 +1,53 @@
 ﻿/* estilo.css */
 
+:root {
+    --primary-color: #007bff;
+    --background-color: #f8f9fa;
+    --card-bg: #ffffff;
+    --sidebar-bg: #1f1f1f;
+    --navbar-bg: #2c2c2c;
+    --text-color: #333;
+    --white: #ffffff;
+    --hover-bg: #3a3a3a;
+    --border-radius: 10px;
+    --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+}
+
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
     margin: 0;
     padding: 0;
-    background-color: #f4f4f4;
+    background-color: var(--background-color);
+    color: var(--text-color);
 }
 
 .header-nav {
-    background-color: #333;
-    color: white;
-    padding: 10px 20px;
+    background-color: var(--navbar-bg);
+    color: var(--white);
+    padding: 16px 24px;
+    box-shadow: var(--shadow);
 }
 
 .navbar h1 {
     margin: 0;
+    font-size: 24px;
+    font-weight: 500;
 }
 
 .sidebar {
-    width: 200px;
-    background-color: #222;
-    color: white;
+    width: 220px;
+    background-color: var(--sidebar-bg);
+    color: var(--white);
     height: 100vh;
     position: fixed;
-    padding-top: 20px;
+    padding: 20px 0;
+    box-shadow: var(--shadow);
 }
 
     .sidebar ul {
-        list-style-type: none;
+        list-style: none;
         padding: 0;
+        margin: 0;
     }
 
         .sidebar ul li {
@@ -36,57 +55,81 @@ body {
         }
 
             .sidebar ul li a {
-                color: white;
+                color: var(--white);
                 text-decoration: none;
-                padding: 10px;
+                padding: 12px 20px;
                 display: block;
+                transition: background-color 0.3s ease;
+                border-left: 4px solid transparent;
             }
 
                 .sidebar ul li a:hover {
-                    background-color: #444;
+                    background-color: var(--hover-bg);
+                    border-left: 4px solid var(--primary-color);
                 }
 
 main {
-    margin-left: 220px;
-    padding: 20px;
+    margin-left: 240px;
+    padding: 30px;
 }
 
 .content {
-    background-color: white;
-    padding: 20px;
-    border-radius: 8px;
+    background-color: var(--card-bg);
+    padding: 30px;
+    border-radius: var(--border-radius);
+    box-shadow: var(--shadow);
 }
 
 h2 {
     margin-top: 0;
+    font-size: 22px;
+    border-bottom: 1px solid #ddd;
+    padding-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .form-group {
-    margin-bottom: 15px;
+    margin-bottom: 20px;
 }
 
 label {
     display: block;
-    font-weight: bold;
+    font-weight: 600;
+    margin-bottom: 6px;
 }
 
 input[type="text"],
 input[type="email"] {
     width: 100%;
-    padding: 8px;
-    margin-top: 5px;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
     box-sizing: border-box;
+    transition: border-color 0.3s ease;
 }
+
+    input[type="text"]:focus,
+    input[type="email"]:focus {
+        border-color: var(--primary-color);
+        outline: none;
+    }
 
 button.btn,
 a.btn {
-    background-color: #007bff;
-    color: white;
+    background-color: var(--primary-color);
+    color: var(--white);
     border: none;
-    padding: 10px 20px;
+    padding: 12px 24px;
     text-decoration: none;
     cursor: pointer;
-    border-radius: 4px;
+    border-radius: var(--border-radius);
     display: inline-block;
     margin-top: 10px;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
+
+    button.btn:hover,
+    a.btn:hover {
+        background-color: #0056b3;
+        box-shadow: var(--shadow);
+    }

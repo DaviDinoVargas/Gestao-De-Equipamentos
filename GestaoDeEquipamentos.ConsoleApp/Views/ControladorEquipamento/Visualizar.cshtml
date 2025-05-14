@@ -8,6 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Visualizar Equipamentos - Gestão de Equipamentos</title>
+    <link rel="stylesheet" href="~/css/estilo.css" />
     <link rel="stylesheet" href="~/css/estiloVisualizarFabricante.css" />
 </head>
 <body>
@@ -26,7 +27,7 @@
 
     <main>
         <div class="card-container">
-            <ul class="equipamentos-list">
+            <ul class="fabricantes-list">
                 @foreach (DetalhesEquipamentoViewModel e in Model.Registros)
                 {
                     <li>
