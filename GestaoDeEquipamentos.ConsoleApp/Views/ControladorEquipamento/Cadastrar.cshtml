@@ -46,16 +46,9 @@
                 <div class="form-group2">
                     <label for="fabricante">Fabricante:</label>
                     <select id="fabricante" name="FabricanteId" required>
-                        @if (Model.Fabricantes != null && Model.Fabricantes.Any())
+                        @foreach (var fabricante in Model.FabricantesDisponiveis)
                         {
-                            foreach (Fabricante fabricante in Model.Fabricantes)
-                            {
-                                <option value="@fabricante.Id">@((fabricante.Nome) ?? "Fabricante desconhecido")</option>
-                            }
-                        }
-                        else
-                        {
-                            <option value="">Nenhum fabricante disponível</option>
+                            <option value="@fabricante.Id">@fabricante.Nome</option>
                         }
                     </select>
                 </div>

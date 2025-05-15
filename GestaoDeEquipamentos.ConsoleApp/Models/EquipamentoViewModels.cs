@@ -1,116 +1,138 @@
 ﻿using GestaoDeEquipamentos.ConsoleApp.Extensoes;
 using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
-using System;
-using System.Collections.Generic;
 
-namespace GestaoDeEquipamentos.ConsoleApp.Models
+namespace GestaoDeEquipamentos.ConsoleApp.Models;
+
+public abstract class FormularioEquipamentoViewModel
 {
-    public abstract class FormularioEquipamentoViewModel
+    public string Nome { get; set; }
+    public decimal PrecoAquisicao { get; set; }
+    public DateTime DataFabricacao { get; set; }
+    public int FabricanteId { get; set; }
+
+    public List<SelecionarFabricanteViewModel> FabricantesDisponiveis { get; set; }
+
+    protected FormularioEquipamentoViewModel()
     {
-        public string Nome { get; set; }
+        FabricantesDisponiveis = new List<SelecionarFabricanteViewModel>();
+    }
+}
 
-        public decimal PrecoAquisicao { get; set; }
+public class SelecionarFabricanteViewModel
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
 
-        public DateTime DataFabricacao { get; set; }
+    public SelecionarFabricanteViewModel(int id, string nome)
+    {
+        Id = id;
+        Nome = nome;
+    }
+}
 
-        public Fabricante Fabricante { get; set; }
+public class CadastrarEquipamentoViewModel : FormularioEquipamentoViewModel
+{
+    public CadastrarEquipamentoViewModel()
+    {
+
     }
 
-    public class CadastrarEquipamentoViewModel : FormularioEquipamentoViewModel
+    public CadastrarEquipamentoViewModel(List<Fabricante> fabricantes)
     {
-        public List<Fabricante> Fabricantes { get; set; }
-
-        public int FabricanteId { get; set; }
-
-        public CadastrarEquipamentoViewModel()
+        foreach (var fabricante in fabricantes)
         {
-            Fabricantes = new List<Fabricante>();
-        }
+            var selecionarVM = new SelecionarFabricanteViewModel(fabricante.Id, fabricante.Nome);
 
-        public CadastrarEquipamentoViewModel(string nome, Fabricante fabricante, decimal precoAquisicao, DateTime dataFabricacao)
-        {
-            Nome = nome;
-            Fabricante = fabricante;
-            PrecoAquisicao = precoAquisicao;
-            DataFabricacao = dataFabricacao;
-            FabricanteId = fabricante.Id;
+            FabricantesDisponiveis.Add(selecionarVM);
         }
     }
+}
 
-    public class EditarEquipamentoViewModel : FormularioEquipamentoViewModel
+public class EditarEquipamentoViewModel : FormularioEquipamentoViewModel
+{
+    public int Id { get; set; }
+
+    public EditarEquipamentoViewModel() { }
+
+    public EditarEquipamentoViewModel(
+        int id,
+        string nome,
+        decimal precoAquisicao,
+        DateTime dataFabricacao,
+        int fabricanteId,
+        List<Fabricante> fabricantes
+    )
     {
-        public List<Fabricante> Fabricantes { get; set; }
+        Id = id;
+        Nome = nome;
+        PrecoAquisicao = precoAquisicao;
+        DataFabricacao = dataFabricacao;
+        FabricanteId = fabricanteId;
 
-        public int FabricanteId { get; set; }
-        public int Id { get; set; }
-        public EditarEquipamentoViewModel()
+        foreach (var fabricante in fabricantes)
         {
-            Fabricantes = new List<Fabricante>();
-        }
+            var selecionarVM = new SelecionarFabricanteViewModel(fabricante.Id, fabricante.Nome);
 
-        public EditarEquipamentoViewModel(int id, string nome, Fabricante fabricante, decimal precoAquisicao, DateTime dataFabricacao)
-        {
-            Id = id;
-            Nome = nome;
-            Fabricante = fabricante;
-            PrecoAquisicao = precoAquisicao;
-            DataFabricacao = dataFabricacao;
-            FabricanteId = fabricante.Id;
+            FabricantesDisponiveis.Add(selecionarVM);
         }
     }
+}
 
-    public class ExcluirEquipamentoViewModel
+public class ExcluirEquipamentoViewModel
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+
+    public ExcluirEquipamentoViewModel(int id, string nome)
     {
-        public int Id { get; set; }
+        Id = id;
+        Nome = nome;
+    }
+}
 
-        public string Nome { get; set; }
+public class VisualizarEquipamentosViewModel
+{
+    public List<DetalhesEquipamentoViewModel> Registros { get; set; }
 
-        public ExcluirEquipamentoViewModel(int id, string nome)
+    public VisualizarEquipamentosViewModel(List<Equipamento> equipamentos)
+    {
+        Registros = new List<DetalhesEquipamentoViewModel>();
+
+        foreach (Equipamento e in equipamentos)
         {
-            Id = id;
-            Nome = nome;
+            DetalhesEquipamentoViewModel detalhesVM = e.ParaDetalhesVM();
+
+            Registros.Add(detalhesVM);
         }
     }
+}
 
-    public class DetalhesEquipamentoViewModel
+public class DetalhesEquipamentoViewModel
+{
+    public int Id { get; set; }
+    public string Nome { get; set; }
+    public decimal PrecoAquisicao { get; set; }
+    public DateTime DataFabricacao { get; set; }
+    public string NomeFabricante { get; set; }
+
+    public DetalhesEquipamentoViewModel(
+        int id,
+        string nome,
+        decimal precoAquisicao,
+        DateTime dataFabricacao,
+        string nomeFabricante
+    )
     {
-        public int Id { get; set; }
-
-        public string Nome { get; set; }
-
-        public Fabricante Fabricante { get; set; }
-
-        public decimal PrecoAquisicao { get; set; }
-
-        public DateTime DataFabricacao { get; set; }
-
-        public DetalhesEquipamentoViewModel(int id, string nome, Fabricante fabricante, decimal preco, DateTime data)
-        {
-            Id = id;
-            Nome = nome;
-            Fabricante = fabricante;
-            PrecoAquisicao = preco;
-            DataFabricacao = data;
-        }
-
-        public override string ToString()
-        {
-            return $"Id: {Id}, Nome: {Nome}, Fabricante: {Fabricante.Nome}, Preço: R${PrecoAquisicao}, Data: {DataFabricacao:d}";
-        }
+        Id = id;
+        Nome = nome;
+        PrecoAquisicao = precoAquisicao;
+        DataFabricacao = dataFabricacao;
+        NomeFabricante = nomeFabricante;
     }
 
-    public class VisualizarEquipamentosViewModel
+    public override string ToString()
     {
-        public List<DetalhesEquipamentoViewModel> Registros { get; } = new List<DetalhesEquipamentoViewModel>();
-
-        public VisualizarEquipamentosViewModel(List<Equipamento> equipamentos)
-        {
-            foreach (Equipamento e in equipamentos)
-            {
-                DetalhesEquipamentoViewModel detalhes = e.ParaDetalhesVM();
-                Registros.Add(detalhes);
-            }
-        }
+        return $"Id: {Id} - Nome: {Nome} - Fabricante: {NomeFabricante} - Preço de Aquisição: {PrecoAquisicao:C2} - Data de Fabricação: {DataFabricacao:d}";
     }
 }

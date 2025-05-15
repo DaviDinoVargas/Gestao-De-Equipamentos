@@ -50,13 +50,9 @@ public class Equipamento : EntidadeBase<Equipamento>
 
     public override void AtualizarRegistro(Equipamento equipamentoAtualizado)
     {
-        if (equipamentoAtualizado.Fabricante == null)
-            throw new ArgumentNullException(nameof(equipamentoAtualizado.Fabricante), "Fabricante não pode ser nulo");
-
         Nome = equipamentoAtualizado.Nome;
         DataFabricacao = equipamentoAtualizado.DataFabricacao;
         PrecoAquisicao = equipamentoAtualizado.PrecoAquisicao;
-        Fabricante = equipamentoAtualizado.Fabricante; 
     }
 
     public override string Validar()

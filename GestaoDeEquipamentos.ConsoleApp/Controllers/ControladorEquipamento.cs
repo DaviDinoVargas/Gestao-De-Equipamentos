@@ -4,135 +4,126 @@ using GestaoDeEquipamentos.ConsoleApp.Models;
 using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
 
-namespace GestaoDeEquipamentos.ConsoleApp.Controllers
+namespace GestaoDeEquipamentos.ConsoleApp.Controllers;
+
+[Route("equipamentos")]
+public class ControladorEquipamento : Controller
 {
-    [Route("equipamentos")]
-    public class ControladorEquipamento : Controller
+    private ContextoDados contextoDados;
+    private IRepositorioEquipamento repositorioEquipamento;
+    private IRepositorioFabricante repositorioFabricante;
+
+    public ControladorEquipamento()
     {
-        [HttpGet("cadastrar")]
-        public IActionResult ExibirFormularioCadastroEquipamento()
+        contextoDados = new ContextoDados(true);
+        repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contextoDados);
+        repositorioFabricante = new RepositorioFabricanteEmArquivo(contextoDados);
+    }
+
+    [HttpGet("cadastrar")]
+    public IActionResult Cadastrar()
+    {
+        var fabricantes = repositorioFabricante.SelecionarRegistros();
+
+        var cadastrarVM = new CadastrarEquipamentoViewModel(fabricantes);
+
+        return View(cadastrarVM);
+    }
+
+    [HttpPost("cadastrar")]
+    public IActionResult Cadastrar(CadastrarEquipamentoViewModel cadastrarVM)
+    {
+        var fabricantes = repositorioFabricante.SelecionarRegistros();
+
+        Equipamento equipamento = cadastrarVM.ParaEntidade(fabricantes);
+
+        repositorioEquipamento.CadastrarRegistro(equipamento);
+
+        var notificacaoVM = new NotificacaoViewModel(
+            "Equipamento Cadastrado!",
+            $"O registro \"{equipamento.Nome}\" foi cadastrado com sucesso!"
+        );
+
+        return View("Notificacao", notificacaoVM);
+    }
+
+    [HttpGet("editar/{id:int}")]
+    public IActionResult Editar([FromRoute] int id)
+    {
+        var equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(id);
+
+        var fabricantes = repositorioFabricante.SelecionarRegistros();
+
+        var editarVM = new EditarEquipamentoViewModel(
+            id,
+            equipamentoSelecionado.Nome,
+            equipamentoSelecionado.PrecoAquisicao,
+            equipamentoSelecionado.DataFabricacao,
+            equipamentoSelecionado.Fabricante.Id,
+            fabricantes
+
+        );
+
+        return View(editarVM);
+    }
+
+    [HttpPost("editar/{id:int}")]
+    public IActionResult Editar([FromRoute] int id, EditarEquipamentoViewModel editarVM)
+    {
+        var fabricantes = repositorioFabricante.SelecionarRegistros();
+
+        var equipamentoEditado = editarVM.ParaEntidade(fabricantes);
+
+        var equipamentoOriginal = repositorioEquipamento.SelecionarRegistroPorId(id);
+
+        if (equipamentoEditado.Fabricante != equipamentoOriginal.Fabricante)
         {
-            ContextoDados contexto = new ContextoDados(true);
-            IRepositorioFabricante repositorioFabricante = new RepositorioFabricanteEmArquivo(contexto);
+            equipamentoOriginal.Fabricante.RemoverEquipamento(equipamentoOriginal);
 
-            List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
-
-            CadastrarEquipamentoViewModel cadastrarVM = new CadastrarEquipamentoViewModel
-            {
-                Fabricantes = fabricantes
-            };
-
-            return View("Cadastrar", cadastrarVM);
-
+            equipamentoOriginal.Fabricante = equipamentoEditado.Fabricante;
         }
 
-        [HttpPost("cadastrar")]
-        public IActionResult CadastrarEquipamento(CadastrarEquipamentoViewModel cadastrarVM)
-        {
-            ContextoDados contexto = new ContextoDados(true);
-            IRepositorioFabricante repositorioFabricante = new RepositorioFabricanteEmArquivo(contexto);
+        repositorioEquipamento.EditarRegistro(id, equipamentoEditado);
 
-            cadastrarVM.Fabricante = repositorioFabricante.SelecionarRegistroPorId(cadastrarVM.FabricanteId);
+        var notificacaoVM = new NotificacaoViewModel(
+            "Equipamento Editado!",
+            $"O registro \"{equipamentoEditado.Nome}\" foi editado com sucesso!"
+        );
 
-            Equipamento novoEquipamento = cadastrarVM.ParaEntidade();
+        return View("Notificacao", notificacaoVM);
+    }
 
-            IRepositorioEquipamento repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contexto);
-            repositorioEquipamento.CadastrarRegistro(novoEquipamento);
+    [HttpGet("excluir/{id:int}")]
+    public IActionResult Excluir([FromRoute] int id)
+    {
+        var equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(id);
 
+        var excluirVM = new ExcluirEquipamentoViewModel(id, equipamentoSelecionado.Nome);
 
-            ViewBag.Mensagem = $"O equipamento \"{cadastrarVM.Nome}\" foi cadastrado com sucesso!";
+        return View(excluirVM);
+    }
 
-            return View("Notificacao");
-        }
+    [HttpPost("excluir/{id:int}")]
+    public IActionResult ExcluirConfirmado([FromRoute] int id)
+    {
+        repositorioEquipamento.ExcluirRegistro(id);
 
-        [HttpGet("editar/{id:int}")]
-        public IActionResult ExibirFormularioEdicaoEquipamento([FromRoute] int id)
-        {
-            ContextoDados contexto = new ContextoDados(true);
-            IRepositorioEquipamento repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contexto);
+        var notificacaoVM = new NotificacaoViewModel(
+            "Equipamento Excluído!",
+            "O registro foi excluído com sucesso!"
+        );
 
-            Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(id);
+        return View("Notificacao", notificacaoVM);
+    }
 
-            IRepositorioFabricante repositorioFabricante = new RepositorioFabricanteEmArquivo(contexto);
+    [HttpGet("visualizar")]
+    public IActionResult Visualizar()
+    {
+        var equipamentos = repositorioEquipamento.SelecionarRegistros();
 
-            List<Fabricante> fabricantes = repositorioFabricante.SelecionarRegistros();
+        var visualizarVM = new VisualizarEquipamentosViewModel(equipamentos);
 
-
-            EditarEquipamentoViewModel editarVM = new EditarEquipamentoViewModel(
-                id,
-                equipamentoSelecionado.Nome,
-                equipamentoSelecionado.Fabricante, 
-                equipamentoSelecionado.PrecoAquisicao,
-                equipamentoSelecionado.DataFabricacao
-            )
-            {
-                Fabricantes = fabricantes 
-            };
-
-            return View("Editar", editarVM);
-        }
-
-        [HttpPost("editar/{id:int}")]
-        public IActionResult EditarEquipamento([FromRoute] int id, EditarEquipamentoViewModel editarVM)
-        {
-            ContextoDados contexto = new ContextoDados(true);
-            IRepositorioEquipamento repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contexto);
-
-            Equipamento equipamentoAtualizado = editarVM.ParaEntidade();
-
-            repositorioEquipamento.EditarRegistro(id, equipamentoAtualizado);
-
-            ViewBag.Mensagem = $"O equipamento \"{editarVM.Nome}\" foi editado com sucesso!";
-
-            return View("Notificacao");
-        }
-
-        [HttpGet("excluir/{id:int}")]
-        public IActionResult ExibirFormularioExclusaoEquipamento([FromRoute] int id)
-        {
-            ContextoDados contexto = new ContextoDados(true); 
-            IRepositorioEquipamento repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contexto); 
-
-            Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(id);
-
-            if (equipamentoSelecionado == null)
-                return RedirectToAction("VisualizarEquipamentos");
-
-            var excluirVM = new ExcluirEquipamentoViewModel(
-                equipamentoSelecionado.Id,
-                equipamentoSelecionado.Nome ?? "Nome não disponível" 
-            );
-
-            return View("Excluir", excluirVM);
-        }
-
-        [HttpPost("excluir/{id:int}")]
-        public IActionResult ExcluirEquipamento([FromRoute] int id)
-        {
-            ContextoDados contexto = new ContextoDados(true);
-            IRepositorioEquipamento repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contexto);
-
-            repositorioEquipamento.ExcluirRegistro(id);
-
-            ViewBag.Mensagem = "O equipamento foi excluído com sucesso!";
-
-            return View("Notificacao");
-        }
-
-        [HttpGet("visualizar")]
-        public IActionResult VisualizarEquipamentos()
-        {
-            ContextoDados contexto = new ContextoDados(true);
-            IRepositorioEquipamento repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contexto);
-
-            List<Equipamento> equipamentos = repositorioEquipamento.SelecionarRegistros();
-
-            VisualizarEquipamentosViewModel visualizarVM = new VisualizarEquipamentosViewModel(equipamentos);
-
-            return View("Visualizar", visualizarVM);
-        }
+        return View(visualizarVM);
     }
 }

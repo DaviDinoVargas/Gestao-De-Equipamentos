@@ -1,33 +1,40 @@
-﻿using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
-using GestaoDeEquipamentos.ConsoleApp.Models;
+﻿using GestaoDeEquipamentos.ConsoleApp.Models;
+using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
+using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
-namespace GestaoDeEquipamentos.ConsoleApp.Extensoes
+namespace GestaoDeEquipamentos.ConsoleApp.Extensoes;
+
+public static class EquipamentoExtensions
 {
-    public static class EquipamentoExtensions
+    public static Equipamento ParaEntidade(
+        this FormularioEquipamentoViewModel formularioVM,
+        List<Fabricante> fabricantes
+    )
     {
-        public static Equipamento ParaEntidade(this FormularioEquipamentoViewModel formulario)
-        {
-            return new Equipamento(
-                formulario.Nome,
-                formulario.PrecoAquisicao,
-                formulario.DataFabricacao,
-                formulario.Fabricante
-            );
+        Fabricante fabricanteSelecionado = null;
 
-           
+        foreach (var f in fabricantes)
+        {
+            if (f.Id == formularioVM.FabricanteId)
+                fabricanteSelecionado = f;
         }
 
-        public static DetalhesEquipamentoViewModel ParaDetalhesVM(this Equipamento equipamento)
-        {
-            DetalhesEquipamentoViewModel detalhes = new DetalhesEquipamentoViewModel(
-                equipamento.Id,
-                equipamento.Nome,
-                equipamento.Fabricante,
-                equipamento.PrecoAquisicao,
-                equipamento.DataFabricacao
-            );
+        return new Equipamento(
+            formularioVM.Nome,
+            formularioVM.PrecoAquisicao,
+            formularioVM.DataFabricacao,
+            fabricanteSelecionado
+        );
+    }
 
-            return detalhes;
-        }
+    public static DetalhesEquipamentoViewModel ParaDetalhesVM(this Equipamento equipamento)
+    {
+        return new DetalhesEquipamentoViewModel(
+            equipamento.Id,
+            equipamento.Nome,
+            equipamento.PrecoAquisicao,
+            equipamento.DataFabricacao,
+            equipamento.Fabricante.Nome
+        );
     }
 }
