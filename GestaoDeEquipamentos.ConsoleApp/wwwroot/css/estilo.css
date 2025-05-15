@@ -1,8 +1,4 @@
-﻿/* estilo.css */
-
-:root {
-    --primary-color: #007bff;
-    --background-color: #f8f9fa;
+﻿:root {
     --card-bg: #ffffff;
     --sidebar-bg: #1f1f1f;
     --navbar-bg: #2c2c2c;
@@ -13,35 +9,58 @@
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* Reset geral */
+* {
     margin: 0;
     padding: 0;
-    background-color: var(--background-color);
-    color: var(--text-color);
+    box-sizing: border-box;
 }
 
+body {
+    margin: 0;
+    padding-top: 70px; /* altura da navbar */
+    padding-left: 220px; /* largura da sidebar */
+    background-color: var(--background-color);
+    color: var(--text-color);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar fixa no topo */
 .header-nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 70px;
+    z-index: 1000;
     background-color: var(--navbar-bg);
     color: var(--white);
-    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    padding: 0 24px;
     box-shadow: var(--shadow);
 }
 
+/* Texto da navbar */
 .navbar h1 {
     margin: 0;
     font-size: 24px;
     font-weight: 500;
 }
 
+/* Sidebar fixa à esquerda */
 .sidebar {
+    position: fixed;
+    top: 70px; /* altura da navbar */
+    left: 0;
+    bottom: 0;
     width: 220px;
     background-color: var(--sidebar-bg);
     color: var(--white);
-    height: 100vh;
-    position: fixed;
     padding: 20px 0;
     box-shadow: var(--shadow);
+    overflow-y: auto;
+    z-index: 999; /* abaixo da navbar */
 }
 
     .sidebar ul {
@@ -68,11 +87,12 @@ body {
                     border-left: 4px solid var(--primary-color);
                 }
 
+/* Conteúdo principal */
 main {
-    margin-left: 240px;
-    padding: 30px;
+    padding: 20px;
 }
 
+/* Cartão de conteúdo */
 .content {
     background-color: var(--card-bg);
     padding: 30px;
@@ -80,6 +100,7 @@ main {
     box-shadow: var(--shadow);
 }
 
+/* Títulos */
 h2 {
     margin-top: 0;
     font-size: 22px;
@@ -88,6 +109,7 @@ h2 {
     margin-bottom: 20px;
 }
 
+/* Formulários */
 .form-group {
     margin-bottom: 20px;
 }
@@ -114,10 +136,9 @@ input[type="email"] {
         outline: none;
     }
 
+/* Botões */
 button.btn,
 a.btn {
-    background-color: var(--primary-color);
-    color: var(--white);
     border: none;
     padding: 12px 24px;
     text-decoration: none;

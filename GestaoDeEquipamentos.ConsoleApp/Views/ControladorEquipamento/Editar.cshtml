@@ -1,7 +1,7 @@
 ﻿@using GestaoDeEquipamentos.ConsoleApp.Models
 @using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
 
-@model EditarEquipamentoViewModel;
+@model EditarEquipamentoViewModel
 
 <!DOCTYPE html>
 <html lang="pt-br">
@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <title>Editar Equipamento - Gestão de Equipamentos</title>
     <link rel="stylesheet" href="~/css/estilo.css" />
-    <link rel="stylesheet" href="~/css/estiloEditarFabricante.css" />
+    <link rel="stylesheet" href="~/css/estiloCadastrarFabricante.css" />
 </head>
 <body>
     <header class="header-nav">
@@ -42,14 +42,19 @@
                     <label for="dataFabricacao">Data de Fabricação:</label>
                     <input type="date" id="dataFabricacao" name="dataFabricacao" value="@Model.DataFabricacao.ToString("yyyy-MM-dd")" required />
                 </div>
-                <div class="form-group">
+                <div class="form-group2">
                     <label for="fabricante">Fabricante:</label>
                     <select id="fabricante" name="FabricanteId" required>
-                        @foreach (var fabricante in Model.Fabricantes)
+                        @if (Model.Fabricantes != null && Model.Fabricantes.Any())
                         {
-                            <option value="@fabricante.Id" @(fabricante.Id == Model.FabricanteId ? "selected" : "")>
-                                @fabricante.Nome
-                            </option>
+                            foreach (var fabricante in Model.Fabricantes)
+                            {
+                                <option value="@fabricante.Id">@((fabricante.Nome) ?? "Fabricante desconhecido")</option>
+                            }
+                        }
+                        else
+                        {
+                            <option value="">Nenhum fabricante disponível</option>
                         }
                     </select>
                 </div>

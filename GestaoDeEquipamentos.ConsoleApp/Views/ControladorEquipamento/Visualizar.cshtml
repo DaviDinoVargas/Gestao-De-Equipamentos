@@ -37,7 +37,7 @@
                                 <p><strong>ID:</strong> @e.Id</p>
                                 <p><strong>Preço:</strong> @e.PrecoAquisicao.ToString("C")</p>
                                 <p><strong>Data de Fabricação:</strong> @e.DataFabricacao.ToString("dd/MM/yyyy")</p>
-                                <p><strong>Fabricante:</strong> @e.Fabricante?.Nome</p>
+                                <p><strong>Fabricante:</strong> @(e.Fabricante?.Nome ?? "Sem fabricante")</p>
                             </div>
                             <div class="card-actions">
                                 <a class="btn-editar" href="/equipamentos/editar/@e.Id">Editar</a>

@@ -93,13 +93,17 @@ namespace GestaoDeEquipamentos.ConsoleApp.Controllers
         [HttpGet("excluir/{id:int}")]
         public IActionResult ExibirFormularioExclusaoEquipamento([FromRoute] int id)
         {
-            ContextoDados contexto = new ContextoDados(true);
-            IRepositorioEquipamento repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contexto);
+            ContextoDados contexto = new ContextoDados(true); 
+            IRepositorioEquipamento repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contexto); 
 
             Equipamento equipamentoSelecionado = repositorioEquipamento.SelecionarRegistroPorId(id);
-            ExcluirEquipamentoViewModel excluirVM = new ExcluirEquipamentoViewModel(
+
+            if (equipamentoSelecionado == null)
+                return RedirectToAction("VisualizarEquipamentos");
+
+            var excluirVM = new ExcluirEquipamentoViewModel(
                 equipamentoSelecionado.Id,
-                equipamentoSelecionado.Nome
+                equipamentoSelecionado.Nome ?? "Nome não disponível" 
             );
 
             return View("Excluir", excluirVM);
