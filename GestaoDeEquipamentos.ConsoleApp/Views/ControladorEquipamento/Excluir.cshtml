@@ -9,7 +9,7 @@
     <meta charset="utf-8" />
     <title>Excluir Equipamento - Gestão de Equipamentos</title>
     <link rel="stylesheet" href="~/css/estilo.css" />
-    <link rel="stylesheet" href="css/estiloExcluir.css" />
+    <link rel="stylesheet" href="~/css/estiloExcluir.css" />
 </head>
 <body>
     <header class="header-nav">
@@ -31,9 +31,9 @@
             <h2>Exclusão de Equipamento</h2>
             <p>Tem certeza que deseja excluir o equipamento <strong>@Model.Nome</strong>?</p>
             <form method="post" action="/equipamentos/excluir/@Model.Id">
-                <div class="card-actions">
-                <button type="submit" class="btn-excluir">Confirmar Exclusão</button>
-                <a href="/equipamentos/visualizar" class="btn-editar">Cancelar</a>
+                <div class="btn-container">
+                    <button type="submit" class="btn-custom btn-excluir">Excluir</button>
+                    <a href="/equipamentos/visualizar" class="btn-custom btn-cancelar">Cancelar</a>
                 </div>
             </form>
         </div>

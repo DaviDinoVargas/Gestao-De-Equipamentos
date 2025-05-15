@@ -9,6 +9,17 @@
     --hover-bg: #3a3a3a;
     --border-radius: 10px;
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --danger-color: #dc3545;
+    --danger-hover: #a71d2a;
+    --secondary-color: #6c757d;
+    --secondary-hover: #5a6268;
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 /* NAVBAR FIXA */
@@ -37,7 +48,8 @@
 /* BODY com padding para não esconder conteúdo */
 body {
     margin: 0;
-    padding: 0;
+    padding-top: 70px; /* altura da navbar */
+    padding-left: 220px; /* largura da sidebar */
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -55,6 +67,7 @@ body {
     padding: 20px 0;
     box-shadow: var(--shadow);
     overflow-y: auto;
+    z-index: 999;
 }
 
     .sidebar ul {
@@ -83,24 +96,20 @@ body {
 
 /* MAIN ajustado para sidebar e navbar fixas */
 main {
-    margin-left: 220px;
-    padding: 90px 30px 30px 30px; /* 70px da navbar + espaço extra */
-    box-sizing: border-box;
-    min-height: 100vh;
+    padding: 30px;
 }
 
 /* CONTEÚDO CENTRAL */
 .content {
     margin: 0 auto;
-    max-width: 850px;
-    padding: 20px;
+    max-width: 8500px;
+    padding: 30px;
     background-color: var(--card-bg);
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
 }
 
-    .content h2,
-    .content h3 {
+    .content h2 {
         margin-top: 0;
         font-size: 1.8rem;
         color: var(--text-color);
@@ -110,113 +119,53 @@ main {
         margin-bottom: 20px;
     }
 
-    .content a {
-        color: var(--primary-color);
-        text-decoration: none;
-        font-weight: 600;
-        transition: color 0.2s ease;
-    }
-
-        .content a:hover {
-            text-decoration: underline;
-            color: #0056b3;
-        }
-
-/* LISTA DE FABRICANTES */
-ul.fabricantes-list {
-    margin-top: 20px;
-    padding-left: 20px;
-}
-
-    ul.fabricantes-list li {
+    .content p {
         margin-bottom: 20px;
-        font-size: 1rem;
-        color: #444;
+        font-size: 1.1rem;
     }
 
-hr {
-    margin: 30px 0;
-    border: none;
-    height: 1px;
-    background-color: #e0e0e0;
+/* FORMULÁRIO DE EXCLUSÃO */
+form {
+    margin-top: 30px;
 }
 
-/* CARDS */
-.card-container {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    margin-top: 20px;
-}
-
-.card {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background-color: var(--card-bg);
-    border-radius: var(--border-radius);
-    box-shadow: var(--shadow);
-    padding: 20px 30px;
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-    .card:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-    }
-
-.card-info {
-    display: flex;
-    flex-direction: column;
-}
-
-    .card-info h4 {
-        font-size: 1.6rem;
-        color: var(--text-color);
-        margin-bottom: 2px;
-        font-weight: 600;
-    }
-
-    .card-info p {
-        color: #666;
-        font-size: 0.95rem;
-        margin-bottom: 5px;
-    }
-
-/* AÇÕES DOS CARDS */
-.card-actions {
+/* ESTILOS PARA BOTÕES */
+.btn-container {
     display: flex;
     gap: 10px;
-    flex-wrap: wrap;
+    margin-top: 20px;
 }
 
-    .card-actions a {
-        text-decoration: none;
-        padding: 10px 18px;
-        border-radius: var(--border-radius);
-        font-weight: 600;
-        font-size: 0.95rem;
-        transition: background-color 0.3s ease, transform 0.2s ease;
-        color: var(--white);
-        box-shadow: var(--shadow);
+.btn-custom {
+    text-decoration: none;
+    padding: 10px 18px;
+    border-radius: var(--border-radius);
+    font-weight: 600;
+    font-size: 0.95rem;
+    transition: all 0.3s ease;
+    color: var(--white);
+    box-shadow: var(--shadow);
+    border: none;
+    cursor: pointer;
+}
+
+    .btn-custom:hover {
+        transform: scale(1.05);
     }
 
-        .card-actions a:hover {
-            transform: scale(1.05);
-        }
+.btn-excluir {
+    background-color: var(--danger-color);
+}
 
-    .card-actions .btn-editar {
-        background-color: #0e2431;
+    .btn-excluir:hover {
+        background-color: var(--danger-hover);
     }
 
-        .card-actions .btn-editar:hover {
-            background-color: #1e3443;
-        }
+.btn-cancelar {
+    background-color: #0e2431; /* Cor específica para o cancelar */
+}
 
-    .card-actions .btn-excluir {
-        background-color: #dc3545;
+    .btn-cancelar:hover {
+        background-color: #1e3443; /* Cor hover específica */
+        transform: scale(1.05);
     }
-
-        .card-actions .btn-excluir:hover {
-            background-color: #a71d2a;
-        }

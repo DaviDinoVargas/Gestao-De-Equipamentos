@@ -10,7 +10,7 @@
     <meta charset="utf-8" />
     <title>Excluir Fabricante - Gestão de Equipamentos</title>
     <link rel="stylesheet" href="~/css/estilo.css" />
-    <link rel="stylesheet" href="~/css/estiloExcluirFabricante.css" />
+    <link rel="stylesheet" href="~/css/estiloExcluir.css" />
 </head>
 <body>
     <header class="header-nav">
@@ -32,8 +32,10 @@
             <h2>Exclusão de Fabricante</h2>
             <p>Tem certeza que deseja excluir o fabricante <strong>@Model.Nome</strong>?</p>
             <form method="post" action="/fabricantes/excluir/@Model.Id">
-                <button type="submit" class="btn btn-excluir">Excluir</button>
-                <a href="/fabricantes/visualizar" class="btn btn-secundario">Cancelar</a>
+                <div class="btn-container">
+                <button type="submit" class="btn-custom btn-excluir">Excluir</button>
+                <a href="/equipamentos/visualizar" class="btn-custom btn-cancelar">Cancelar</a>
+                </div>
             </form>
         </div>
     </main>
