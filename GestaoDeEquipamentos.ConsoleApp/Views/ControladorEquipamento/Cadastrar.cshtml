@@ -1,5 +1,6 @@
 ﻿@using GestaoDeEquipamentos.ConsoleApp.Models
 @using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
+@using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante
 
 @model CadastrarEquipamentoViewModel
 
@@ -47,7 +48,7 @@
                     <select id="fabricante" name="FabricanteId" required>
                         @if (Model.Fabricantes != null && Model.Fabricantes.Any())
                         {
-                            foreach (var fabricante in Model.Fabricantes)
+                            foreach (Fabricante fabricante in Model.Fabricantes)
                             {
                                 <option value="@fabricante.Id">@((fabricante.Nome) ?? "Fabricante desconhecido")</option>
                             }
