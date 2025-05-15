@@ -11,7 +11,6 @@
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* NAVBAR FIXA */
 .header-nav {
     position: fixed;
     top: 0;
@@ -27,14 +26,12 @@
     box-shadow: var(--shadow);
 }
 
-/* Título da navbar */
 .navbar h1 {
     margin: 0;
     font-size: 24px;
     font-weight: 500;
 }
 
-/* BODY com padding para não esconder conteúdo */
 body {
     margin: 0;
     padding: 0;
@@ -43,7 +40,6 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* SIDEBAR fixa à esquerda */
 .sidebar {
     position: fixed;
     top: 70px;
@@ -81,15 +77,14 @@ body {
                     border-left: 4px solid var(--primary-color);
                 }
 
-/* MAIN ajustado para sidebar e navbar fixas */
+
 main {
     margin-left: 220px;
-    padding: 90px 30px 30px 30px; /* 70px da navbar + espaço extra */
+    padding: 90px 30px 30px 30px; 
     box-sizing: border-box;
     min-height: 100vh;
 }
 
-/* CONTEÚDO CENTRAL */
 .content {
     margin: 0 auto;
     max-width: 850px;
@@ -122,7 +117,6 @@ main {
             color: #0056b3;
         }
 
-/* LISTA DE FABRICANTES */
 ul.fabricantes-list {
     margin-top: 20px;
     padding-left: 20px;
@@ -141,7 +135,6 @@ hr {
     background-color: #e0e0e0;
 }
 
-/* CARDS */
 .card-container {
     display: flex;
     flex-direction: column;
@@ -183,7 +176,6 @@ hr {
         margin-bottom: 5px;
     }
 
-/* AÇÕES DOS CARDS */
 .card-actions {
     display: flex;
     gap: 10px;

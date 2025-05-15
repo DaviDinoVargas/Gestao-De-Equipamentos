@@ -15,14 +15,12 @@
     --secondary-hover: #5a6268;
 }
 
-/* Reset básico */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
-/* NAVBAR FIXA */
 .header-nav {
     position: fixed;
     top: 0;
@@ -38,24 +36,20 @@
     box-shadow: var(--shadow);
 }
 
-/* Título da navbar */
 .navbar h1 {
     margin: 0;
     font-size: 24px;
     font-weight: 500;
 }
 
-/* BODY com padding para não esconder conteúdo */
 body {
     margin: 0;
-    padding-top: 70px; /* altura da navbar */
-    padding-left: 220px; /* largura da sidebar */
+    padding-top: 70px;
+    padding-left: 220px;
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
-
-/* SIDEBAR fixa à esquerda */
 .sidebar {
     position: fixed;
     top: 70px;
@@ -94,12 +88,10 @@ body {
                     border-left: 4px solid var(--primary-color);
                 }
 
-/* MAIN ajustado para sidebar e navbar fixas */
 main {
     padding: 30px;
 }
 
-/* CONTEÚDO CENTRAL */
 .content {
     margin: 0 auto;
     max-width: 8500px;
@@ -124,12 +116,10 @@ main {
         font-size: 1.1rem;
     }
 
-/* FORMULÁRIO DE EXCLUSÃO */
 form {
     margin-top: 30px;
 }
 
-/* ESTILOS PARA BOTÕES */
 .btn-container {
     display: flex;
     gap: 10px;
@@ -162,10 +152,10 @@ form {
     }
 
 .btn-cancelar {
-    background-color: #0e2431; /* Cor específica para o cancelar */
+    background-color: #0e2431; 
 }
 
     .btn-cancelar:hover {
-        background-color: #1e3443; /* Cor hover específica */
+        background-color: #1e3443; 
         transform: scale(1.05);
     }

@@ -9,7 +9,6 @@
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
 }
 
-/* Reset geral */
 * {
     margin: 0;
     padding: 0;
@@ -18,14 +17,13 @@
 
 body {
     margin: 0;
-    padding-top: 70px; /* altura da navbar */
-    padding-left: 220px; /* largura da sidebar */
+    padding-top: 70px;
+    padding-left: 220px; 
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
-/* Navbar fixa no topo */
 .header-nav {
     position: fixed;
     top: 0;
@@ -41,17 +39,15 @@ body {
     box-shadow: var(--shadow);
 }
 
-/* Texto da navbar */
 .navbar h1 {
     margin: 0;
     font-size: 24px;
     font-weight: 500;
 }
 
-/* Sidebar fixa à esquerda */
 .sidebar {
     position: fixed;
-    top: 70px; /* altura da navbar */
+    top: 70px; 
     left: 0;
     bottom: 0;
     width: 220px;
@@ -60,7 +56,7 @@ body {
     padding: 20px 0;
     box-shadow: var(--shadow);
     overflow-y: auto;
-    z-index: 999; /* abaixo da navbar */
+    z-index: 999; 
 }
 
     .sidebar ul {
@@ -87,12 +83,10 @@ body {
                     border-left: 4px solid var(--primary-color);
                 }
 
-/* Conteúdo principal */
 main {
     padding: 20px;
 }
 
-/* Cartão de conteúdo */
 .content {
     background-color: var(--card-bg);
     padding: 30px;
@@ -100,7 +94,6 @@ main {
     box-shadow: var(--shadow);
 }
 
-/* Títulos */
 h2 {
     margin-top: 0;
     font-size: 22px;
@@ -109,7 +102,6 @@ h2 {
     margin-bottom: 20px;
 }
 
-/* Formulários */
 .form-group {
     margin-bottom: 20px;
 }
@@ -136,7 +128,6 @@ input[type="email"] {
         outline: none;
     }
 
-/* Botões */
 button.btn,
 a.btn {
     border: none;
