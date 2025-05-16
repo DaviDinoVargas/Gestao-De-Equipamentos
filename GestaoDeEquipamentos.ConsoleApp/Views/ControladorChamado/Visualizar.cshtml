@@ -8,8 +8,7 @@
 <head>
     <meta charset="utf-8" />
     <title>Visualizar Chamados - Gestão de Equipamentos</title>
-    <link rel="stylesheet" href="~/css/estilo.css" />
-    <link rel="stylesheet" href="~/css/estiloVisualizarFabricante.css" />
+    <link rel="stylesheet" href="~/css/estiloVisualizarChamados.css" />
 </head>
 <body>
     <header class="header-nav">
@@ -26,11 +25,16 @@
     </aside>
 
     <main>
-        <div class="card-container">
-            <ul class="fabricantes-list">
+        <div class="search-container">
+            <input type="text" id="searchInput" placeholder="Pesquisar chamados..." class="search-input">
+            <button id="searchButton" class="btn-search">Buscar</button>
+        </div>
+
+        <div class="card-container" id="chamadosContainer">
+            <ul class="fabricantes-list" id="chamadosList">
                 @foreach (var chamado in Model.Registros)
                 {
-                    <li>
+                    <li class="chamado-item">
                         <div class="card">
                             <div class="card-info">
                                 <h4>@chamado.Titulo</h4>
@@ -49,6 +53,8 @@
                 }
             </ul>
         </div>
+
+        <script src="~/js/procurarChamado.js"></script>
     </main>
 </body>
 </html>
