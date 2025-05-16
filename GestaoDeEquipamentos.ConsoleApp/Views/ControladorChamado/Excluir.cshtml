@@ -1,0 +1,42 @@
+﻿@using GestaoDeEquipamentos.ConsoleApp.Models
+@using GestaoDeEquipamentos.ConsoleApp.ModuloChamado
+
+@model ExcluirChamadoViewModel
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <title>Excluir Chamado - Gestão de Equipamentos</title>
+    <link rel="stylesheet" href="~/css/estilo.css" />
+    <link rel="stylesheet" href="~/css/estiloExcluir.css" />
+</head>
+<body>
+    <header class="header-nav">
+        <div class="navbar">
+            <h1>Gestão de Equipamentos</h1>
+        </div>
+    </header>
+
+    <aside class="sidebar">
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/chamados/cadastrar">Cadastrar Novo Chamado</a></li>
+            <li><a href="/chamados/visualizar">Visualizar Chamados</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <div class="content">
+            <h2>Exclusão de Chamado</h2>
+            <p>Tem certeza que deseja excluir o chamado <strong>@Model.Titulo</strong>?</p>
+            <form method="post" action="/chamados/excluir/@Model.Id">
+                <div class="btn-container">
+                    <button type="submit" class="btn-custom btn-excluir">Excluir</button>
+                    <a href="/chamados/visualizar" class="btn-custom btn-cancelar">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

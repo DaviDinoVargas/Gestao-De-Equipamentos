@@ -27,6 +27,8 @@ public class EditarFabricanteViewModel : FormularioFabricanteViewModel
 {
     public int Id { get; set; }
 
+    public EditarFabricanteViewModel() { }
+
     public EditarFabricanteViewModel(int id, string nome, string email, string telefone)
     {
         Id = id;

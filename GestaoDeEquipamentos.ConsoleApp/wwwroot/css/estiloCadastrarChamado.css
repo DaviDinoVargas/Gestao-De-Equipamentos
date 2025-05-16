@@ -7,6 +7,8 @@
     --hover-bg: #3a3a3a;
     --border-radius: 10px;
     --shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    --primary-color: #2980b9;
+    --background-color: #f5f5f5;
 }
 
 * {
@@ -18,7 +20,7 @@
 body {
     margin: 0;
     padding-top: 70px;
-    padding-left: 220px; 
+    padding-left: 220px;
     background-color: var(--background-color);
     color: var(--text-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -47,7 +49,7 @@ body {
 
 .sidebar {
     position: fixed;
-    top: 70px; 
+    top: 70px;
     left: 0;
     bottom: 0;
     width: 220px;
@@ -56,7 +58,7 @@ body {
     padding: 20px 0;
     box-shadow: var(--shadow);
     overflow-y: auto;
-    z-index: 999; 
+    z-index: 999;
 }
 
     .sidebar ul {
@@ -92,6 +94,8 @@ main {
     padding: 30px;
     border-radius: var(--border-radius);
     box-shadow: var(--shadow);
+    max-width: 800px;
+    margin: 0 auto;
 }
 
 h2 {
@@ -102,7 +106,9 @@ h2 {
     margin-bottom: 20px;
 }
 
-.form-group {
+.form-group,
+.form-group2,
+.form-group3 {
     margin-bottom: 20px;
 }
 
@@ -110,39 +116,52 @@ label {
     display: block;
     font-weight: 600;
     margin-bottom: 6px;
+    color: #555;
 }
 
 input[type="text"],
-input[type="email"] {
+textarea,
+select {
     width: 100%;
     padding: 10px;
-    border: 1px solid #ccc;
-    border-radius: var(--border-radius);
+    border: 1.8px solid #ccc;
+    border-radius: 6px;
     box-sizing: border-box;
     transition: border-color 0.3s ease;
+    font-size: 15px;
+}
+
+textarea {
+    min-height: 120px;
+    resize: vertical;
 }
 
     input[type="text"]:focus,
-    input[type="email"]:focus {
-        border-color: var(--primary-color);
+    textarea:focus,
+    select:focus {
         outline: none;
+        border-color: var(--primary-color);
     }
 
-button.btn,
-a.btn {
+.btn {
+    background-color: #0e2431;
+    color: white;
     border: none;
     padding: 12px 24px;
-    text-decoration: none;
+    font-size: 1rem;
     cursor: pointer;
-    border-radius: var(--border-radius);
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
     display: inline-block;
     margin-top: 10px;
-    transition: background-color 0.3s ease, box-shadow 0.3s ease;
 }
 
-    button.btn:hover,
-    a.btn:hover {
-        background-color: #0056b3;
+    .btn:hover {
+        background-color: #1e3443;
         box-shadow: var(--shadow);
     }
 
+form {
+    max-width: 600px;
+    margin: 0 auto;
+}

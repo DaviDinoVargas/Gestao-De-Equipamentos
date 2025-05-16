@@ -132,3 +132,32 @@ form {
     .btn-secundario:hover {
         background-color: #d5d9dc;
     }
+
+
+.form-group3 {
+    margin-bottom: 18px;
+}
+
+    .form-group3 label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #555;
+    }
+
+    .form-group3 textarea {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 15px;
+        border: 1.8px solid #ccc;
+        border-radius: 6px;
+        transition: border-color 0.3s ease;
+        min-height: 100px;
+        resize: vertical;
+        font-family: inherit;
+    }
+
+        .form-group3 textarea:focus {
+            outline: none;
+            border-color: #2980b9;
+        }

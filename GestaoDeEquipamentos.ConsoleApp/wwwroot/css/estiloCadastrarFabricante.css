@@ -1,5 +1,4 @@
-﻿@import url('estilo.css');
-
+﻿
 form {
     max-width: 600px;
     margin: 0 auto;
@@ -8,26 +7,31 @@ form {
     border-radius: 8px;
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
-.content .form-group input {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+
+.content .form-group {
+    margin-bottom: 18px;
 }
 
-.content .btn {
-    background-color: #0e2431;
-    color: white;
-    border: none;
-    padding: 10px 20px;
-    font-size: 1rem;
-    cursor: pointer;
-    border-radius: 4px;
-}
-
-    .content .btn:hover {
-        background-color: #1e3443;
+    .content .form-group label {
+        display: block;
+        font-weight: 600;
+        margin-bottom: 6px;
+        color: #555;
     }
+
+    .content .form-group input {
+        width: 100%;
+        padding: 8px 12px;
+        font-size: 15px;
+        border: 1.8px solid #ccc;
+        border-radius: 6px;
+        transition: border-color 0.3s ease;
+    }
+
+        .content .form-group input:focus {
+            outline: none;
+            border-color: #2980b9;
+        }
 
 .form-group2 {
     margin-bottom: 18px;
@@ -53,3 +57,19 @@ form {
             outline: none;
             border-color: #2980b9;
         }
+
+
+.content .btn {
+    background-color: #0e2431;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-size: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+    .content .btn:hover {
+        background-color: #1e3443;
+    }
