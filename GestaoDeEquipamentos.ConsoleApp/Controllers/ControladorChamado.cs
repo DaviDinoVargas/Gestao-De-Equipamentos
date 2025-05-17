@@ -3,6 +3,8 @@ using GestaoDeEquipamentos.ConsoleApp.Extensoes;
 using GestaoDeEquipamentos.ConsoleApp.Models;
 using GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
+using GestaoDeEquipamentos.ConsoleApp.ModuloFuncionario;
+using GestaoDeEquipamentos.ConsoleApp.ModuloUsuario;
 using Microsoft.AspNetCore.Mvc;
 
 namespace GestaoDeEquipamentos.ConsoleApp.Controllers;
@@ -13,28 +15,37 @@ public class ControladorChamado : Controller
     private ContextoDados contextoDados;
     private IRepositorioChamado repositorioChamado;
     private IRepositorioEquipamento repositorioEquipamento;
+    private IRepositorioUsuario repositorioUsuario;
+    private IRepositorioFuncionario repositorioFuncionario;
 
     public ControladorChamado()
     {
         contextoDados = new ContextoDados(true);
         repositorioChamado = new RepositorioChamadoEmArquivo(contextoDados);
         repositorioEquipamento = new RepositorioEquipamentoEmArquivo(contextoDados);
+        repositorioUsuario = new RepositorioUsuarioEmArquivo(contextoDados);
+        repositorioFuncionario = new RepositorioFuncionarioEmArquivo(contextoDados);
     }
 
     [HttpGet("cadastrar")]
     public IActionResult Cadastrar()
     {
         var equipamentos = repositorioEquipamento.SelecionarRegistros();
-        var viewModel = new CadastrarChamadoViewModel(equipamentos);
+        var usuarios = repositorioUsuario.SelecionarRegistros();
+        var funcionarios = repositorioFuncionario.SelecionarRegistros();
+
+        var viewModel = new CadastrarChamadoViewModel(equipamentos, usuarios, funcionarios);
 
         return View(viewModel);
     }
-
     [HttpPost("cadastrar")]
     public IActionResult Cadastrar(CadastrarChamadoViewModel viewModel)
     {
         var equipamentos = repositorioEquipamento.SelecionarRegistros();
-        var chamado = viewModel.ParaEntidade(equipamentos);
+        var usuarios = repositorioUsuario.SelecionarRegistros();
+        var funcionarios = repositorioFuncionario.SelecionarRegistros();
+
+        var chamado = viewModel.ParaEntidade(equipamentos, usuarios, funcionarios);
 
         repositorioChamado.CadastrarRegistro(chamado);
 
@@ -46,13 +57,16 @@ public class ControladorChamado : Controller
         return View("Notificacao", notificacaoVM);
     }
 
+
     [HttpGet("editar/{id:int}")]
     public IActionResult Editar([FromRoute] int id)
     {
         var chamado = repositorioChamado.SelecionarRegistroPorId(id);
         var equipamentos = repositorioEquipamento.SelecionarRegistros();
+        var usuarios = repositorioUsuario.SelecionarRegistros();
+        var funcionarios = repositorioFuncionario.SelecionarRegistros();
 
-        var viewModel = new EditarChamadoViewModel(chamado, equipamentos);
+        var viewModel = new EditarChamadoViewModel(chamado, equipamentos, usuarios, funcionarios);
 
         return View(viewModel);
     }
@@ -61,7 +75,10 @@ public class ControladorChamado : Controller
     public IActionResult Editar([FromRoute] int id, EditarChamadoViewModel viewModel)
     {
         var equipamentos = repositorioEquipamento.SelecionarRegistros();
-        var chamadoEditado = viewModel.ParaEntidade(equipamentos);
+        var usuarios = repositorioUsuario.SelecionarRegistros();
+        var funcionarios = repositorioFuncionario.SelecionarRegistros();
+
+        var chamadoEditado = viewModel.ParaEntidade(equipamentos, usuarios, funcionarios);
 
         repositorioChamado.EditarRegistro(id, chamadoEditado);
 
@@ -102,5 +119,54 @@ public class ControladorChamado : Controller
         var viewModel = new VisualizarChamadosViewModel(chamados);
 
         return View(viewModel);
+    }
+
+    [HttpGet("visualizar/{id:int}")]
+    public IActionResult VisualizarPorId([FromRoute] int id)
+    {
+        var chamado = repositorioChamado.SelecionarRegistroPorId(id);
+
+        if (chamado == null)
+        {
+            var notificacaoVM = new NotificacaoViewModel(
+                "Chamado Não Encontrado",
+                $"O chamado com ID {id} não foi encontrado."
+            );
+            return View("Notificacao", notificacaoVM);
+        }
+
+        var equipamentos = repositorioEquipamento.SelecionarRegistros();
+        var usuarios = repositorioUsuario.SelecionarRegistros();
+        var funcionarios = repositorioFuncionario.SelecionarRegistros();
+
+        var detalhesVM = chamado.ParaDetalhesVM();
+
+        var modeloCompleto = new DetalhesCompletosChamadoViewModel(
+            detalhesVM,
+            equipamentos,
+            usuarios,
+            funcionarios);
+
+        return View("DetalhesChamado", modeloCompleto);
+    }
+    [HttpPost("alterar-status/{id:int}")]
+    public IActionResult AlterarStatus([FromRoute] int id, [FromForm] string NovoStatus)
+    {
+        var chamado = repositorioChamado.SelecionarRegistroPorId(id);
+
+        if (chamado == null)
+        {
+            var notificacaoVM = new NotificacaoViewModel(
+                "Chamado Não Encontrado",
+                $"O chamado com ID {id} não foi encontrado."
+            );
+            return View("Notificacao", notificacaoVM);
+        }
+
+        var status = Enum.Parse<StatusChamado>(NovoStatus);
+        chamado.AtualizarStatus(status, "Sistema"); 
+        repositorioChamado.EditarRegistro(id, chamado);
+
+        return RedirectToAction("VisualizarPorId", new { id });
     }
 }

@@ -194,3 +194,22 @@ public class LogChamadoViewModel
         return $"{Data:g} - {Acao} - Por: {Responsavel}";
     }
 }
+public class DetalhesCompletosChamadoViewModel
+{
+    public DetalhesChamadoViewModel Chamado { get; set; }
+    public List<SelecionarEquipamentoViewModel> EquipamentosDisponiveis { get; set; }
+    public List<SelecionarUsuarioViewModel> UsuariosDisponiveis { get; set; }
+    public List<SelecionarFuncionarioViewModel> FuncionariosDisponiveis { get; set; }
+
+    public DetalhesCompletosChamadoViewModel(
+        DetalhesChamadoViewModel chamado,
+        List<Equipamento> equipamentos,
+        List<Usuario> usuarios,
+        List<Funcionario> funcionarios)
+    {
+        Chamado = chamado;
+        EquipamentosDisponiveis = equipamentos.Select(e => new SelecionarEquipamentoViewModel(e.Id, e.Nome)).ToList();
+        UsuariosDisponiveis = usuarios.Select(u => new SelecionarUsuarioViewModel(u.Id, u.Nome)).ToList();
+        FuncionariosDisponiveis = funcionarios.Select(f => new SelecionarFuncionarioViewModel(f.Id, f.Nome)).ToList();
+    }
+}

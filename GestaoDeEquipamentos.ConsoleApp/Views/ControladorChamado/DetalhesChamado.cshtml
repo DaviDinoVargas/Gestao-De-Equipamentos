@@ -1,0 +1,88 @@
+﻿@using GestaoDeEquipamentos.ConsoleApp.Models
+@using GestaoDeEquipamentos.ConsoleApp.ModuloChamado
+
+@model DetalhesCompletosChamadoViewModel
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Detalhes do Chamado - Gestão de Equipamentos</title>
+  <link rel="stylesheet" href="~/css/estiloDetalhesChamado.css">
+</head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Detalhes do Chamado #@Model.Chamado.Id</h1>
+      <a href="/chamados/visualizar" class="btn-voltar">Voltar</a>
+    </header>
+
+    <div class="chamado-container">
+      <div class="chamado-header">
+        <div class="chamado-info">
+          <h2>@Model.Chamado.Titulo</h2>
+          <span class="status-badge status-@Model.Chamado.Status.ToLower()">@Model.Chamado.Status</span>
+        </div>
+        <div class="chamado-meta">
+          <span>Aberto em: @Model.Chamado.DataAbertura.ToString("dd/MM/yyyy")</span>
+          <span>Dias em aberto: @Model.Chamado.DiasEmAberto</span>
+        </div>
+      </div>
+
+      <div class="chamado-content">
+        <div class="chamado-section">
+          <h3>Descrição</h3>
+          <p>@Model.Chamado.Descricao</p>
+        </div>
+
+        <div class="chamado-details">
+          <div class="detail-card">
+            <h4>Equipamento</h4>
+            <p>@Model.Chamado.NomeEquipamento</p>
+          </div>
+          
+          <div class="detail-card">
+            <h4>Usuário</h4>
+            <p>@Model.Chamado.NomeUsuario</p>
+          </div>
+          
+          <div class="detail-card">
+            <h4>Responsável</h4>
+            <p>@Model.Chamado.NomeFuncionarioResponsavel</p>
+          </div>
+        </div>
+
+        <div class="chamado-section">
+          <h3>Alterar Status</h3>
+          <form method="post" action="/chamados/alterar-status/@Model.Chamado.Id" class="status-form">
+            <select name="NovoStatus" required>
+              <option value="">Selecione um status</option>
+              <option value="Aberto">Aberto</option>
+              <option value="Pendente">Pendente</option>
+              <option value="Fechado">Fechado</option>
+            </select>
+            <button type="submit" class="btn-atualizar">Atualizar Status</button>
+          </form>
+        </div>
+
+                <div class="chamado-section">
+                    <h3>Histórico de Alterações</h3>
+                    <div class="timeline">
+                        @foreach (var log in Model.Chamado.Logs.OrderByDescending(l => l.Data))
+                        {
+                            <div class="timeline-item">
+                                <div class="timeline-date">@log.Data.ToString("dd/MM/yyyy HH:mm")</div>
+                                <div class="timeline-content">
+                                    <p>@log.Acao</p>
+                                    <span class="timeline-author">@log.Responsavel</span>
+                                </div>
+                            </div>
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

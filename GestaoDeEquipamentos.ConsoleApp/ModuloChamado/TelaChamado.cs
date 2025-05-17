@@ -4,7 +4,7 @@ using GestaoDeEquipamentos.ConsoleApp.Util;
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloChamado;
 
-public class TelaChamado : TelaBase<Chamado>, ITelaCrud
+/*public class TelaChamado : TelaBase<Chamado>, ITelaCrud
 {
     public IRepositorioChamado repositorioChamado;
     public IRepositorioEquipamento repositorioEquipamento;
@@ -217,4 +217,4 @@ public class TelaChamado : TelaBase<Chamado>, ITelaCrud
 
         Notificador.ExibirMensagem("Pressione ENTER para continuar...", ConsoleColor.DarkYellow);
     }
-}
+}*/

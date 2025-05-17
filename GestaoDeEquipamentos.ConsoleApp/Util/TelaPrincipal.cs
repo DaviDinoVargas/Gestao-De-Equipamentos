@@ -5,7 +5,7 @@ using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
 namespace GestaoDeEquipamentos.ConsoleApp.Util;
 
-public class TelaPrincipal
+/* public class TelaPrincipal
 {
     private char opcaoPrincipal;
     private IRepositorioFabricante repositorioFabricante;
@@ -56,4 +56,4 @@ public class TelaPrincipal
 
         return null;
     }
-}
+}*/

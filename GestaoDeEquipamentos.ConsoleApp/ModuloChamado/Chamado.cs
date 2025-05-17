@@ -110,4 +110,13 @@ public class Chamado : EntidadeBase<Chamado>
 
         return erros;
     }
+    public void AtualizarStatus(StatusChamado novoStatus, string responsavel)
+    {
+        Status = novoStatus;
+
+        if (novoStatus == StatusChamado.Fechado)
+            DataFechamento = DateTime.Now;
+
+        Logs.Add(new LogChamado($"Status alterado para {novoStatus}", responsavel));
+    }
 }

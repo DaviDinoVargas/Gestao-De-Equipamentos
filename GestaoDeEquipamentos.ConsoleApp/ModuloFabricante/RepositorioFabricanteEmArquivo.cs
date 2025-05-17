@@ -2,9 +2,9 @@
 
 namespace GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 
-public class RepositorioFuncionarioEmArquivo : RepositorioBaseEmArquivo<Fabricante>, IRepositorioFabricante
+public class RepositorioFabricanteEmArquivo : RepositorioBaseEmArquivo<Fabricante>, IRepositorioFabricante
 {
-    public RepositorioFuncionarioEmArquivo(ContextoDados contexto) : base(contexto)
+    public RepositorioFabricanteEmArquivo(ContextoDados contexto) : base(contexto)
     {
     }
 

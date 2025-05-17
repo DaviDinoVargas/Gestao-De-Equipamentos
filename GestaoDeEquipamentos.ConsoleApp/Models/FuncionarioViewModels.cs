@@ -1,4 +1,5 @@
-﻿using GestaoDeEquipamentos.ConsoleApp.ModuloFuncionario;
+﻿using GestaoDeEquipamentos.ConsoleApp.Extensoes;
+using GestaoDeEquipamentos.ConsoleApp.ModuloFuncionario;
 
 namespace GestaoDeEquipamentos.ConsoleApp.Models;
 

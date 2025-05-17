@@ -24,37 +24,61 @@
         </ul>
     </aside>
 
-    <main>
-        <div class="search-container">
-            <input type="text" id="searchInput" placeholder="Pesquisar chamados..." class="search-input">
-            <button id="searchButton" class="btn-search">Buscar</button>
-        </div>
+    <div class="container">
+        <header>
+            <h1>Chamados Técnicos</h1>
+            <input type="text" id="searchInput" placeholder="Pesquisar...">
+            <div class="filters">
+                <select id="sortFilter">
+                    <option value="recent">Mais Recentes</option>
+                    <option value="oldest">Mais Antigos</option>
+                    <option value="az">A-Z</option>
+                    <option value="za">Z-A</option>
+                    <option value="diasMais">Dias em Aberto (Maior)</option>
+                    <option value="diasMenos">Dias em Aberto (Menor)</option>
+                </select>
+            </div>
+        </header>
 
-        <div class="card-container" id="chamadosContainer">
-            <ul class="fabricantes-list" id="chamadosList">
+        <table>
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Log</th>
+                    <th>Título</th>
+                    <th>Equipamento</th>
+                    <th>Usuário</th>
+                    <th>Abertura</th>
+                    <th>Dias em Aberto</th>
+                    <th>Status</th>
+                    <th>Ações</th>
+                </tr>
+            </thead>
+            <tbody id="chamadosTable">
                 @foreach (var chamado in Model.Registros)
                 {
-                    <li class="chamado-item">
-                        <div class="card">
-                            <div class="card-info">
-                                <h4>@chamado.Titulo</h4>
-                                <p><strong>ID:</strong> @chamado.Id</p>
-                                <p><strong>Descrição:</strong> @chamado.Descricao</p>
-                                <p><strong>Equipamento:</strong> @chamado.NomeEquipamento</p>
-                                <p><strong>Data de Abertura:</strong> @chamado.DataAbertura.ToString("dd/MM/yyyy")</p>
-                                <p><strong>Dias em Aberto:</strong> @chamado.DiasEmAberto</p>
-                            </div>
-                            <div class="card-actions">
-                                <a class="btn-editar" href="/chamados/editar/@chamado.Id">Editar</a>
-                                <a class="btn-excluir" href="/chamados/excluir/@chamado.Id">Excluir</a>
-                            </div>
-                        </div>
-                    </li>
+                    <tr>
+                        <td>@chamado.Id</td>
+                        <td>@chamado.Titulo</td>
+                        <td>@chamado.Descricao</td>
+                        <td>@chamado.NomeEquipamento</td>
+                        <td>@chamado.NomeUsuario</td>
+                        <td>@chamado.DataAbertura.ToString("dd/MM/yyyy")</td>
+                        <td>@chamado.DiasEmAberto</td>
+                        <td>
+                            <span class="status-badge status-@chamado.Status.ToLower()">@chamado.Status</span>
+                        </td>
+                        <td class="card-actions">
+                            <a href="/chamados/visualizar/@chamado.Id" class="btn-detalhes">Detalhes</a>
+                            <a href="/chamados/editar/@chamado.Id" class="btn-editar">Editar</a>
+                            <a href="/chamados/excluir/@chamado.Id" class="btn-excluir">Excluir</a>
+                        </td>
+                    </tr>
                 }
-            </ul>
-        </div>
+            </tbody>
+        </table>
+    </div>
 
-        <script src="~/js/procurarChamado.js"></script>
-    </main>
+    <script src="~/js/filtrarChamados.js"></script>
 </body>
 </html>
