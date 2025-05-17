@@ -3,12 +3,14 @@ using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento;
 using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 using System.Text.Json.Serialization;
 using System.Text.Json;
+using GestaoDeEquipamentos.ConsoleApp.ModuloFuncionario;
 
 namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado;
 
 public class ContextoDados
 {
     public List<Fabricante> Fabricantes { get; set; }
+    public List<Funcionario> Funcionarios { get; set; }
     public List<Equipamento> Equipamentos { get; set; }
     public List<Chamado> Chamados { get; set; }
 
@@ -20,6 +22,7 @@ public class ContextoDados
         Fabricantes = new List<Fabricante>();
         Equipamentos = new List<Equipamento>();
         Chamados = new List<Chamado>();
+        Funcionarios = new List<Funcionario>();
     }
 
     public ContextoDados(bool carregarDados) : this()
@@ -64,5 +67,6 @@ public class ContextoDados
         this.Fabricantes = contextoArmazenado.Fabricantes;
         this.Equipamentos = contextoArmazenado.Equipamentos;
         this.Chamados = contextoArmazenado.Chamados;
+        this.Funcionarios = contextoArmazenado.Funcionarios;
     }
 }
