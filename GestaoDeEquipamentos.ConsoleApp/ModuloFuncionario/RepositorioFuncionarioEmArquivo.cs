@@ -11,6 +11,6 @@ public class RepositorioFuncionarioEmArquivo : RepositorioBaseEmArquivo<Funciona
 
     protected override List<Funcionario> ObterRegistros()
     {
-        return contexto.Funcionario;
+        return contexto.Funcionarios;
     }
 }

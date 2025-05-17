@@ -4,6 +4,7 @@ using GestaoDeEquipamentos.ConsoleApp.ModuloFabricante;
 using System.Text.Json.Serialization;
 using System.Text.Json;
 using GestaoDeEquipamentos.ConsoleApp.ModuloFuncionario;
+using GestaoDeEquipamentos.ConsoleApp.ModuloUsuario;
 
 namespace GestaoDeEquipamentos.ConsoleApp.Compartilhado;
 
@@ -12,6 +13,7 @@ public class ContextoDados
     public List<Fabricante> Fabricantes { get; set; }
     public List<Funcionario> Funcionarios { get; set; }
     public List<Equipamento> Equipamentos { get; set; }
+    public List<Usuario> Usuarios { get; set; }
     public List<Chamado> Chamados { get; set; }
 
     private string pastaArmazenamento = "C:\\temp";
@@ -23,6 +25,7 @@ public class ContextoDados
         Equipamentos = new List<Equipamento>();
         Chamados = new List<Chamado>();
         Funcionarios = new List<Funcionario>();
+        Usuarios = new List<Usuario>();
     }
 
     public ContextoDados(bool carregarDados) : this()
@@ -68,5 +71,6 @@ public class ContextoDados
         this.Equipamentos = contextoArmazenado.Equipamentos;
         this.Chamados = contextoArmazenado.Chamados;
         this.Funcionarios = contextoArmazenado.Funcionarios;
+        this.Usuarios = contextoArmazenado.Usuarios;
     }
 }
