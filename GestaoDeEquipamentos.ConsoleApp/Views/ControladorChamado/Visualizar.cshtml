@@ -1,14 +1,19 @@
 ﻿@using GestaoDeEquipamentos.ConsoleApp.Models
+@using System.Text.Json
 @using GestaoDeEquipamentos.ConsoleApp.ModuloChamado
 
 @model VisualizarChamadosViewModel
+
+@{
+    ViewData["Title"] = "Chamados";
+}
 
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
     <title>Visualizar Chamados - Gestão de Equipamentos</title>
-    <link rel="stylesheet" href="~/css/estiloVisualizarChamados.css" />
+    <link rel="stylesheet" href="~/css/estiloVisualizarTable.css" />
 </head>
 <body>
     <header class="header-nav">
@@ -40,12 +45,13 @@
             </div>
         </header>
 
-        <table>
+        <div class="table-container">
+            <table class="table table-striped">
             <thead>
                 <tr>
                     <th>ID</th>
-                    <th>Log</th>
                     <th>Título</th>
+                    <th>Descrição</th>
                     <th>Equipamento</th>
                     <th>Usuário</th>
                     <th>Abertura</th>
@@ -55,30 +61,49 @@
                 </tr>
             </thead>
             <tbody id="chamadosTable">
-                @foreach (var chamado in Model.Registros)
+                @if (Model.Registros.Any())
+                {
+                    foreach (var chamado in Model.Registros)
+                    {
+                        <tr>
+                            <td>@chamado.Id</td>
+                            <td>@chamado.Titulo</td>
+                            <td>@chamado.Descricao</td>
+                            <td>@chamado.NomeEquipamento</td>
+                            <td>@chamado.NomeUsuario</td>
+                            <td>@chamado.DataAbertura.ToString("dd/MM/yyyy")</td>
+                            <td>@chamado.DiasEmAberto</td>
+                            <td>
+                                <span class="status-badge status-@chamado.Status.ToLower()">@chamado.Status</span>
+                            </td>
+                            <td class="card-actions">
+                                <a href="/chamados/visualizar/@chamado.Id" class="btn-detalhes">Detalhes</a>
+                                <a href="/chamados/editar/@chamado.Id" class="btn-editar">Editar</a>
+                                <a href="/chamados/excluir/@chamado.Id" class="btn-excluir">Excluir</a>
+                            </td>
+                        </tr>
+                    }
+                }
+                else
                 {
                     <tr>
-                        <td>@chamado.Id</td>
-                        <td>@chamado.Titulo</td>
-                        <td>@chamado.Descricao</td>
-                        <td>@chamado.NomeEquipamento</td>
-                        <td>@chamado.NomeUsuario</td>
-                        <td>@chamado.DataAbertura.ToString("dd/MM/yyyy")</td>
-                        <td>@chamado.DiasEmAberto</td>
-                        <td>
-                            <span class="status-badge status-@chamado.Status.ToLower()">@chamado.Status</span>
-                        </td>
-                        <td class="card-actions">
-                            <a href="/chamados/visualizar/@chamado.Id" class="btn-detalhes">Detalhes</a>
-                            <a href="/chamados/editar/@chamado.Id" class="btn-editar">Editar</a>
-                            <a href="/chamados/excluir/@chamado.Id" class="btn-excluir">Excluir</a>
-                        </td>
+                        <td colspan="9">Nenhum chamado encontrado.</td>
                     </tr>
                 }
             </tbody>
         </table>
     </div>
+    </div>
 
-    <script src="~/js/filtrarChamados.js"></script>
+    @{
+        var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = null };
+        var dadosJson = JsonSerializer.Serialize(Model.Registros, jsonOptions);
+    }
+
+    <script>
+        const chamados = @Html.Raw(dadosJson);
+    </script>
+
+    <script src="~/js/filtrarChamado.js"></script>
 </body>
 </html>
