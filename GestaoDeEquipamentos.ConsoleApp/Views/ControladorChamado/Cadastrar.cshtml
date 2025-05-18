@@ -27,26 +27,65 @@
 
     <main>
         <div class="content">
-            <h2>Cadastro de Chamado</h2>
-            <form method="post" action="/chamados/cadastrar">
+            <h2>Cadastrar Chamado</h2>
+
+            <form method="post" asp-action="Cadastrar">
                 <div class="form-group">
-                    <label for="titulo">Título:</label>
-                    <input type="text" id="titulo" name="titulo" value="@Model.Titulo" required />
+                    <label for="Titulo">Título</label>
+                    <input type="text" class="form-control" id="Titulo" name="Titulo" value="@Model.Titulo" required />
                 </div>
-                <div class="form-group3">
-                    <label for="descricao">Descrição:</label>
-                    <textarea id="descricao" name="descricao" required>@Model.Descricao</textarea>
+
+                <div class="form-group">
+                    <label for="Descricao">Descrição</label>
+                    <textarea class="form-control" id="Descricao" name="Descricao" required>@Model.Descricao</textarea>
                 </div>
-                <div class="form-group2">
-                    <label for="equipamento">Equipamento:</label>
-                    <select id="equipamento" name="EquipamentoId" required>
+
+                <div class="form-group">
+                    <label for="EquipamentoId">Equipamento</label>
+                    <select class="form-control" id="EquipamentoId" name="EquipamentoId" required>
+                        <option value="">Selecione um equipamento</option>
                         @foreach (var equipamento in Model.EquipamentosDisponiveis)
                         {
                             <option value="@equipamento.Id">@equipamento.Nome</option>
                         }
                     </select>
                 </div>
-                <button type="submit" class="btn">Cadastrar</button>
+
+                <div class="form-group">
+                    <label for="UsuarioId">Usuário</label>
+                    <select class="form-control" id="UsuarioId" name="UsuarioId" required>
+                        <option value="">Selecione um usuário</option>
+                        @foreach (var usuario in Model.UsuariosDisponiveis)
+                        {
+                            <option value="@usuario.Id">@usuario.Nome</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="FuncionarioResponsavelId">Funcionário Responsável</label>
+                    <select class="form-control" id="FuncionarioResponsavelId" name="FuncionarioResponsavelId" required>
+                        <option value="">Selecione um funcionário</option>
+                        @foreach (var funcionario in Model.FuncionariosDisponiveis)
+                        {
+                            <option value="@funcionario.Id">@funcionario.Nome</option>
+                        }
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="Status">Status</label>
+                    <select class="form-control" id="Status" name="Status" required>
+                        <option value="">Selecione o status</option>
+                        @foreach (var status in Enum.GetValues(typeof(GestaoDeEquipamentos.ConsoleApp.ModuloChamado.StatusChamado)))
+                        {
+                            <option value="@status">@status</option>
+                        }
+                    </select>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Salvar</button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index", "Chamado")'">Cancelar</button>
             </form>
         </div>
     </main>

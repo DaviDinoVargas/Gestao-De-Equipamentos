@@ -7,4 +7,12 @@
 		<Nullable>enable</Nullable>
 	</PropertyGroup>
 
+	<ItemGroup>
+	  <Content Remove="Views\Shared\_Layout.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Views\Shared\_Layout.cshtml" />
+	</ItemGroup>
+
 </Project>

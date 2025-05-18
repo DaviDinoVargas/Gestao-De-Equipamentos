@@ -32,7 +32,7 @@
     <div class="container">
         <header>
             <h1>Chamados Técnicos</h1>
-            <input type="text" id="searchInput" placeholder="Pesquisar...">
+                <input type="text" id="searchInput" placeholder="Pesquisar...">
             <div class="filters">
                 <select id="sortFilter">
                     <option value="recent">Mais Recentes</option>
@@ -100,8 +100,12 @@
         var dadosJson = JsonSerializer.Serialize(Model.Registros, jsonOptions);
     }
 
+    <script id="chamados-data" type="application/json">
+        @Html.Raw(dadosJson)
+    </script>
+
     <script>
-        const chamados = @Html.Raw(dadosJson);
+        const chamados = JSON.parse(document.getElementById("chamados-data").textContent);
     </script>
 
     <script src="~/js/filtrarChamado.js"></script>

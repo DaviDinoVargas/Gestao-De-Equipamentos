@@ -1,0 +1,42 @@
+﻿@using GestaoDeEquipamentos.ConsoleApp.Models
+@using GestaoDeEquipamentos.ConsoleApp.ModuloUsuario
+
+@model ExcluirUsuarioViewModel
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <title>Excluir Usuário - Gestão de Equipamentos</title>
+    <link rel="stylesheet" href="~/css/estilo.css" />
+    <link rel="stylesheet" href="~/css/estiloExcluir.css" />
+</head>
+<body>
+    <header class="header-nav">
+        <div class="navbar">
+            <h1>Gestão de Equipamentos</h1>
+        </div>
+    </header>
+
+    <aside class="sidebar">
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/usuarios/cadastrar">Cadastrar Novo Usuário</a></li>
+            <li><a href="/usuarios/visualizar">Visualizar Usuários</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <div class="content">
+            <h2>Exclusão de Usuário</h2>
+            <p>Tem certeza que deseja excluir o usuário <strong>@Model.Nome</strong>?</p>
+            <form method="post" action="/usuarios/excluir/@Model.Id">
+                <div class="btn-container">
+                    <button type="submit" class="btn-custom btn-excluir">Excluir</button>
+                    <a href="/usuarios/visualizar" class="btn-custom btn-cancelar">Cancelar</a>
+                </div>
+            </form>
+        </div>
+    </main>
+</body>
+</html>

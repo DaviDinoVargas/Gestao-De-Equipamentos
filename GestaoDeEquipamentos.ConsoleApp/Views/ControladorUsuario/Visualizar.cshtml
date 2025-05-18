@@ -1,17 +1,17 @@
 ﻿@using GestaoDeEquipamentos.ConsoleApp.Models
+@using GestaoDeEquipamentos.ConsoleApp.ModuloUsuario
 @using System.Text.Json
-@using GestaoDeEquipamentos.ConsoleApp.ModuloEquipamento
 
-@model VisualizarEquipamentosViewModel
+@model VisualizarUsuariosViewModel
 @{
-    ViewData["Title"] = "Equipamentos";
+    ViewData["Title"] = "Usuario";
 }
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Visualizar Equipamentos</title>
+    <title>Visualizar Usuários</title>
     <link rel="stylesheet" href="~/css/estiloLayoutGeral.css">
 </head>
 <body>
@@ -31,15 +31,13 @@
     <main>
         <div class="container">
             <header>
-                <h2>Equipamentos</h2>
+                <h2>Usuários</h2>
                 <div style="display: flex; gap: 1rem; align-items: center;">
                     <input type="text" id="searchInput" placeholder="Pesquisar por nome..." />
                     <div class="filters">
                         <select id="sortFilter">
-                            <option value="recent">Mais Recentes</option>
-                            <option value="oldest">Mais Antigos</option>
-                            <option value="precoMaior">Maior Preço</option>
-                            <option value="precoMenor">Menor Preço</option>
+                            <option value="az">A-Z</option>
+                            <option value="za">Z-A</option>
                         </select>
                     </div>
                 </div>
@@ -51,24 +49,24 @@
                         <tr>
                             <th>ID</th>
                             <th>Nome</th>
-                            <th>Preço</th>
-                            <th>Fabricante</th>
-                            <th>Data Fabricação</th>
+                            <th>Email</th>
+                            <th>Documento</th>
+                            <th>Telefone</th>
                             <th>Ações</th>
                         </tr>
                     </thead>
-                    <tbody id="equipamentosTable">
-                        @foreach (var e in Model.Registros)
+                    <tbody id="usuariosTable">
+                        @foreach (var u in Model.Registros)
                         {
                             <tr>
-                                <td>@e.Id</td>
-                                <td>@e.Nome</td>
-                                <td>@e.PrecoAquisicao.ToString("C")</td>
-                                <td>@(e.NomeFabricante ?? "Sem fabricante")</td>
-                                <td>@e.DataFabricacao.ToString("dd/MM/yyyy")</td>
+                                <td>@u.Id</td>
+                                <td>@u.Nome</td>
+                                <td>@u.Email</td>
+                                <td>@u.Documento</td>
+                                <td>@u.Telefone</td>
                                 <td class="card-actions">
-                                    <a href="/equipamentos/editar/@e.Id" class="btn-editar">Editar</a>
-                                    <a href="/equipamentos/excluir/@e.Id" class="btn-excluir">Excluir</a>
+                                    <a href="/usuarios/editar/@u.Id" class="btn-editar">Editar</a>
+                                    <a href="/usuarios/excluir/@u.Id" class="btn-excluir">Excluir</a>
                                 </td>
                             </tr>
                         }
@@ -82,10 +80,13 @@
         var dadosJson = JsonSerializer.Serialize(Model.Registros, jsonOptions);
     }
 
-    <script>
-        const equipamentos = @Html.Raw(dadosJson);
+    <script id="usuarios-data" type="application/json">
+        @Html.Raw(dadosJson)
     </script>
 
-    <script src="~/js/filtrarEquipamentos.js"></script>
+    <script>
+        const usuarios = JSON.parse(document.getElementById('usuarios-data').textContent);
+    </script>
+    <script src="~/js/filtrarUsuarios.js"></script>
 </body>
 </html>

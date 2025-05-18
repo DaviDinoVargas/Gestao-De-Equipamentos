@@ -13,13 +13,14 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 body {
     margin: 0;
     padding-top: 70px;
     padding-left: 220px;
-    background-color: var(--background-color);
+    background-color: #f0f4f8;
     color: var(--text-color);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
@@ -113,56 +114,6 @@ input[type="text"] {
     border: 1px solid #ccc;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    table-layout: fixed;
-}
-
-th:nth-child(1), td:nth-child(1) {
-    width: 20%;
-}
-
-th:nth-child(2), td:nth-child(2) {
-    width: 100%;
-}
-
-th:nth-child(3), td:nth-child(3) {
-    width: 100%;
-    max-width: 400px;
-    overflow: hidden;
-    text-overflow: ellipsis;
-    white-space: nowrap;
-}
-
-th:nth-child(4), td:nth-child(4) {
-    width: 100%;
-}
-
-th:nth-child(5), td:nth-child(5) {
-    width: 40%;
-}
-
-th:nth-child(6), td:nth-child(6) {
-    width: 60%;
-}
-
-th:nth-child(7), td:nth-child(7) {
-    width: 65%;
-}
-
-th:nth-child(8), td:nth-child(8) {
-    width: 80%;
-}
-
-th:nth-child(9), td:nth-child(9) {
-    width: 100%;
-}
-
-tbody tr:first-child td {
-    border-top: none;
-}
-
 .table-container {
     overflow-x: auto;
     width: 100%;
@@ -170,8 +121,10 @@ tbody tr:first-child td {
     position: relative;
 }
 
-tbody tr {
-    border-bottom: 1px solid #eee;
+table {
+    width: 100%;
+    border-collapse: collapse;
+    table-layout: fixed;
 }
 
 th, td {
@@ -183,66 +136,109 @@ th, td {
     white-space: nowrap;
 }
 
-th {
-    background-color: #f8fafc;
-}
+    /* Coluna ID */
+    th:nth-child(1), td:nth-child(1) {
+        width: 5%;
+    }
 
-tbody tr:last-child td {
-    border-bottom: none;
-}
+    /* Coluna Título - sem truncamento */
+    th:nth-child(2), td:nth-child(2) {
+        width: 10%;
+        overflow: visible;
+        white-space: normal;
+        text-overflow: unset;
+    }
 
-tbody tr:first-child {
+    /* Coluna Descrição - truncado */
+    th:nth-child(3), td:nth-child(3) {
+        width: 10%;
+        max-width: 250px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* Coluna Equipamento - truncado */
+    th:nth-child(4), td:nth-child(4) {
+        width: 10%;
+        max-width: 200px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+    }
+
+    /* Coluna Usuário */
+    th:nth-child(5), td:nth-child(5) {
+        width: 10%;
+    }
+
+    /* Coluna Abertura */
+    th:nth-child(6), td:nth-child(6) {
+        width: 10%;
+    }
+
+    /* Coluna Dias em Aberto */
+    th:nth-child(7), td:nth-child(7) {
+        width: 10%;
+    }
+
+    /* Coluna Status */
+    th:nth-child(8), td:nth-child(8) {
+        width: 10%;
+    }
+
+    /* Coluna Ações - botões */
+    th:nth-child(9), td:nth-child(9) {
+        width: 180px;
+        white-space: nowrap;
+        overflow: visible;
+        text-overflow: unset;
+    }
+
+tbody tr:first-child td {
     border-top: none;
 }
 
-td {
-    border: none;
+tbody tr {
+    border-bottom: 1px solid #eee;
 }
+
+    tbody tr:last-child td {
+        border-bottom: none;
+    }
 
 .card-actions {
     display: flex;
     gap: 0.5rem;
+    justify-content: flex-start;
+    flex-wrap: nowrap;
 }
 
-    .card-actions .btn-detalhes {
-        background-color: #0e2431;
-        color: white;
-        border: none;
+    .card-actions .btn-detalhes,
+    .card-actions .btn-editar,
+    .card-actions .btn-excluir {
         padding: 0.4rem 0.8rem;
         border-radius: 10px;
         cursor: pointer;
         text-decoration: none;
         font-size: 0.85rem;
+        border: none;
+        color: white;
+        white-space: nowrap;
     }
 
-        .card-actions .btn-detalhes:hover {
-            background-color: #1e3443;
-        }
-
+    .card-actions .btn-detalhes,
     .card-actions .btn-editar {
         background-color: #0e2431;
-        color: white;
-        border: none;
-        padding: 0.4rem 0.8rem;
-        border-radius: 10px;
-        cursor: pointer;
-        text-decoration: none;
-        font-size: 0.85rem;
     }
 
+        .card-actions .btn-detalhes:hover,
         .card-actions .btn-editar:hover {
             background-color: #1e3443;
         }
 
     .card-actions .btn-excluir {
         background-color: #dc3545;
-        color: white;
-        border: none;
-        padding: 0.4rem 0.8rem;
-        border-radius: 10px;
-        cursor: pointer;
-        text-decoration: none;
-        font-size: 0.85rem;
     }
 
         .card-actions .btn-excluir:hover {
@@ -272,4 +268,36 @@ td {
 .status-fechado {
     background-color: #e52232;
     color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    body {
+        padding-left: 0;
+    }
+
+    .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+    }
+
+        .sidebar.active {
+            transform: translateX(0);
+        }
+
+    .container {
+        margin: 20px 10px;
+    }
+
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    input[type="text"], .filters select {
+        width: 100%;
+    }
+
+    th, td {
+        font-size: 0.9rem;
+    }
 }

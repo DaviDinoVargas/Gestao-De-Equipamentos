@@ -1,0 +1,58 @@
+﻿@using GestaoDeEquipamentos.ConsoleApp.Models
+@using GestaoDeEquipamentos.ConsoleApp.ModuloUsuario
+
+@model EditarUsuarioViewModel
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="utf-8" />
+    <title>Editar Usuário - Gestão de Equipamentos</title>
+    <link rel="stylesheet" href="~/css/estilo.css" />
+    <link rel="stylesheet" href="~/css/estiloCadastrarFabricante.css" />
+</head>
+<body>
+    <header class="header-nav">
+        <div class="navbar">
+            <h1>Gestão de Equipamentos</h1>
+        </div>
+    </header>
+
+    <aside class="sidebar">
+        <ul>
+            <li><a href="/">Página Inicial</a></li>
+            <li><a href="/usuarios/cadastrar">Cadastrar Novo Usuário</a></li>
+            <li><a href="/usuarios/visualizar">Visualizar Usuários</a></li>
+        </ul>
+    </aside>
+
+    <main>
+        <div class="content">
+            <h2>Edição de Usuário</h2>
+            <form method="post" action="/usuarios/editar/@Model.Id">
+                <div class="form-group">
+                    <label for="nome">Nome:</label>
+                    <input type="text" id="nome" name="nome" value="@Model.Nome" required />
+                </div>
+                <div class="form-group">
+                    <label for="email">Email:</label>
+                    <input type="email" id="email" name="email" value="@Model.Email" required />
+                </div>
+                <div class="form-group">
+                    <label for="telefone">Telefone:</label>
+                    <input type="text" id="telefone" name="telefone" value="@Model.Telefone" required />
+                </div>
+                <div class="form-group">
+                    <label for="documento">Documento (CPF/CNPJ):</label>
+                    <input type="text" id="documento" name="documento" value="@Model.Documento" required />
+                </div>
+                <div class="form-group">
+                    <label for="departamento">Departamento:</label>
+                    <input type="text" id="departamento" name="departamento" value="@Model.Documento" required />
+                </div>
+                <button type="submit" class="btn">Salvar Alterações</button>
+            </form>
+        </div>
+    </main>
+</body>
+</html>
