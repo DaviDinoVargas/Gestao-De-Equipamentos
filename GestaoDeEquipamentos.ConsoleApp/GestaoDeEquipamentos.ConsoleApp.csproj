@@ -9,10 +9,12 @@
 
 	<ItemGroup>
 	  <Content Remove="Views\Shared\_Layout.cshtml" />
+	  <Content Remove="Views\Shared\_Navbar.cshtml" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <None Include="Views\Shared\_Layout.cshtml" />
+	  <None Include="Views\Shared\_Navbar.cshtml" />
 	</ItemGroup>
 
 </Project>

@@ -1,47 +1,73 @@
-﻿
-<link rel="stylesheet" href="~/css/estilo.css" />
-<link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
-<input type="checkbox" id="fabricantes-toggle" hidden />
-<label for="fabricantes-toggle" class="menu-label">
-    <i class='bx bxs-building'></i> Fabricantes <i class='bx bx-chevron-down arrow'></i>
-</label>
-<div class="submenu">
-    <a href="/fabricantes/cadastrar"><i class='bx bx-plus-circle'></i> Cadastrar Novo Fabricante</a>
-    <a href="/fabricantes/visualizar"><i class='bx bx-show'></i> Visualizar Fabricantes</a>
-</div>
+﻿<aside class="sidebar">
+    <nav>
+        <ul class="sidebar-menu">
 
-<input type="checkbox" id="equipamentos-toggle" hidden />
-<label for="equipamentos-toggle" class="menu-label">
-    <i class='bx bx-cog'></i> Equipamentos <i class='bx bx-chevron-down arrow'></i>
-</label>
-<div class="submenu">
-    <a href="/equipamentos/cadastrar"><i class='bx bx-plus-circle'></i> Cadastrar Novo Equipamento</a>
-    <a href="/equipamentos/visualizar"><i class='bx bx-show'></i> Visualizar Equipamentos</a>
-</div>
+            <li class="menu-item has-dropdown">
+                <a href="#" class="dropdown-toggle">
+                    <i class='bx bxs-factory'></i>
+                    <span>Fabricantes</span>
+                    <i class='bx bx-chevron-down dropdown-icon'></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/fabricantes/cadastrar"><i class='bx bx-plus-circle'></i> Cadastrar</a></li>
+                    <li><a href="/fabricantes/visualizar"><i class='bx bx-show'></i> Visualizar</a></li>
+                </ul>
+            </li>
 
-<input type="checkbox" id="usuarios-toggle" hidden />
-<label for="usuarios-toggle" class="menu-label">
-    <i class='bx bxs-user-account'></i> Usuários <i class='bx bx-chevron-down arrow'></i>
-</label>
-<div class="submenu">
-    <a href="/usuarios/cadastrar"><i class='bx bx-plus-circle'></i> Cadastrar Novo Usuário</a>
-    <a href="/usuarios/visualizar"><i class='bx bx-show'></i> Visualizar Usuários</a>
-</div>
+            <li class="menu-item has-dropdown">
+                <a href="#" class="dropdown-toggle">
+                    <i class='bx bx-hdd'></i>
+                    <span>Equipamentos</span>
+                    <i class='bx bx-chevron-down dropdown-icon'></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/equipamentos/cadastrar"><i class='bx bx-plus-circle'></i> Cadastrar</a></li>
+                    <li><a href="/equipamentos/visualizar"><i class='bx bx-show'></i> Visualizar</a></li>
+                </ul>
+            </li>
 
-<input type="checkbox" id="funcionarios-toggle" hidden />
-<label for="funcionarios-toggle" class="menu-label">
-    <i class='bx bxs-id-card'></i> Funcionários <i class='bx bx-chevron-down arrow'></i>
-</label>
-<div class="submenu">
-    <a href="/funcionarios/cadastrar"><i class='bx bx-plus-circle'></i> Cadastrar Novo Funcionário</a>
-    <a href="/funcionarios/visualizar"><i class='bx bx-show'></i> Visualizar Funcionários</a>
-</div>
+            <li class="menu-item has-dropdown">
+                <a href="#" class="dropdown-toggle">
+                    <i class='bx bx-user'></i>
+                    <span>Usuários</span>
+                    <i class='bx bx-chevron-down dropdown-icon'></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/usuarios/cadastrar"><i class='bx bx-user-plus'></i> Cadastrar</a></li>
+                    <li><a href="/usuarios/visualizar"><i class='bx bx-show'></i> Visualizar</a></li>
+                </ul>
+            </li>
 
-<input type="checkbox" id="chamados-toggle" hidden />
-<label for="chamados-toggle" class="menu-label">
-    <i class='bx bxs-comment-detail'></i> Chamados <i class='bx bx-chevron-down arrow'></i>
-</label>
-<div class="submenu">
-    <a href="/chamados/cadastrar"><i class='bx bx-plus-circle'></i> Cadastrar Novo Chamado</a>
-    <a href="/chamados/visualizar"><i class='bx bx-show'></i> Visualizar Chamados</a>
-</div>
+            <li class="menu-item has-dropdown">
+                <a href="#" class="dropdown-toggle">
+                    <i class='bx bx-id-card'></i>
+                    <span>Funcionários</span>
+                    <i class='bx bx-chevron-down dropdown-icon'></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/funcionarios/cadastrar"><i class='bx bx-user-plus'></i> Cadastrar</a></li>
+                    <li><a href="/funcionarios/visualizar"><i class='bx bx-show'></i> Visualizar</a></li>
+                </ul>
+            </li>
+
+            <li class="menu-item has-dropdown">
+                <a href="#" class="dropdown-toggle">
+                    <i class='bx bx-message-detail'></i>
+                    <span>Chamados</span>
+                    <i class='bx bx-chevron-down dropdown-icon'></i>
+                </a>
+                <ul class="dropdown-menu">
+                    <li><a href="/chamados/cadastrar"><i class='bx bx-message-add'></i> Cadastrar</a></li>
+                    <li><a href="/chamados/visualizar"><i class='bx bx-show'></i> Visualizar</a></li>
+                </ul>
+            </li>
+
+            <li class="menu-item">
+                <a href="/">
+                    <i class='bx bx-home'></i>
+                    <span>Página Inicial</span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</aside>
