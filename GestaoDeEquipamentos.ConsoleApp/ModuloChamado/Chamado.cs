@@ -71,6 +71,8 @@ public class Chamado : EntidadeBase<Chamado>
 
         if (novoStatus == StatusChamado.Fechado)
             DataFechamento = DateTime.Now;
+        else
+            DataFechamento = null; 
 
         Logs.Add(new LogChamado($"Status alterado para {novoStatus}", responsavel.Nome));
     }
@@ -116,6 +118,8 @@ public class Chamado : EntidadeBase<Chamado>
 
         if (novoStatus == StatusChamado.Fechado)
             DataFechamento = DateTime.Now;
+        else
+            DataFechamento = null;
 
         Logs.Add(new LogChamado($"Status alterado para {novoStatus}", responsavel));
     }
