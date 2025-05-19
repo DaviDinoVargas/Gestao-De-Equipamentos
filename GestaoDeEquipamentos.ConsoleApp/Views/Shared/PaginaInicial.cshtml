@@ -1,4 +1,10 @@
-﻿<!DOCTYPE html>
+﻿@using GestaoDeEquipamentos.ConsoleApp.Models
+@using System.Text.Json
+@using GestaoDeEquipamentos.ConsoleApp.ModuloChamado
+@using static GestaoDeEquipamentos.ConsoleApp.Models.DetalhesCompletosChamadoViewModel
+
+@model DashboardViewModel
+<!DOCTYPE html>
 <html lang="pt-br">
 <head>
     <meta charset="utf-8" />
@@ -99,11 +105,116 @@
     <main>
         <div class="content">
             <h2>Gestão de Equipamentos</h2>
-            <div style="height: 2000px;"></div>
-        </div>
-    </main>
+            <div style="height: 2000px;">
+                <h1>Dashboard de Chamados</h1>
 
-    <script src="@Url.Content("~/js/sidebar.js")"></script>
-    
+                <section class="resumo-cards">
+                    <div class="card">Total: @Model.TotalChamados</div>
+                    <div class="card">Abertos: @Model.ChamadosAbertos</div>
+                    <div class="card">Pendentes: @Model.ChamadosPendentes</div>
+                    <div class="card">Fechados (30 dias): @Model.ChamadosFechadosUltimos30Dias</div>
+                    <div class="card">Média Dias em Aberto: @Model.MediaDiasEmAberto.ToString("F1")</div>
+                </section>
+
+                <div class="graficos">
+                    <div style="height: 300px;">
+                        <canvas id="graficoPizza"></canvas>
+                    </div>
+                    <div style="height: 300px;">
+                        <canvas id="graficoEquipamento"></canvas>
+                    </div>
+                </div>
+
+                <div class="chamado-container">
+                    <div class="chamado-content">
+
+                       
+                        <div class="chamado-section">
+                            <h3 class="chamados-criticos-title">Chamados Críticos</h3>
+                            <div class="chamado-details">
+                                <table class="tabela-detalhes">
+                                    <thead>
+                                        <tr>
+                                            <th>Título</th>
+                                            <th>Equipamento</th>
+                                            <th>Dias</th>
+                                            <th>Responsável</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var chamado in Model.ChamadosCriticos)
+                                        {
+                                            <tr>
+                                                <td>@chamado.Titulo</td>
+                                                <td>@chamado.NomeEquipamento</td>
+                                                <td>@chamado.DiasEmAberto</td>
+                                                <td>@chamado.NomeFuncionarioResponsavel</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+
+                     
+                        <div class="chamado-section">
+                            <h3>Métricas de Desempenho</h3>
+                            <div class="chamado-details">
+                                <div class="detail-card">
+                                    <h4>Taxa de Resolução</h4>
+                                    <p>@Model.TaxaResolucao.ToString("P1")</p>
+                                </div>
+                                <div class="detail-card">
+                                    <h4>Tempo Médio de Resolução</h4>
+                                    <p>@Model.TempoMedioResolucao.ToString("F1") dias</p>
+                                </div>
+                            </div>
+                        </div>
+
+                       
+                        <div class="chamado-section">
+                            <h3>Atividades Recentes</h3>
+                            <div class="timeline">
+                                @foreach (var log in Model.LogsRecentes)
+                                {
+                                    <div class="timeline-item">
+                                        <div class="timeline-date">@log.Data.ToString("g")</div>
+                                        <div class="timeline-content">
+                                            <p>@log.Acao</p>
+                                            <div class="timeline-author">Por: @log.Responsavel</div>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+                @{
+                    var jsonOptions = new JsonSerializerOptions { PropertyNamingPolicy = null };
+                }
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+                <script id="statusDataJson" type="application/json">
+                    @Html.Raw(JsonSerializer.Serialize(Model.DistribuicaoPorStatus, jsonOptions))
+                </script>
+
+                <script id="equipamentoDataJson" type="application/json">
+                    @Html.Raw(JsonSerializer.Serialize(Model.ChamadosPorEquipamento, jsonOptions))
+                </script>
+
+                <script id="tendenciaDataJson" type="application/json">
+                    @Html.Raw(JsonSerializer.Serialize(Model.TendenciaResolucao, jsonOptions))
+                </script>
+
+                <script src="~/js/dashboard.js"></script>
+                <script src="~/js/sidebar.js"></script>
+            </div>
+        </div>
+    </main>   
+   
+
 </body>
 </html>

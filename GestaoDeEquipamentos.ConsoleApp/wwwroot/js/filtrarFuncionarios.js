@@ -36,7 +36,6 @@ function renderTabela(dados) {
 function filtrarEOrdenar() {
     let filtroTexto = searchInput.value.toLowerCase();
 
-    // Filtra por texto em campos relevantes
     let filtrados = chamados.filter(c => {
         return c.Titulo.toLowerCase().includes(filtroTexto) ||
             c.Descricao.toLowerCase().includes(filtroTexto) ||
@@ -45,7 +44,6 @@ function filtrarEOrdenar() {
             c.Status.toLowerCase().includes(filtroTexto);
     });
 
-    // Ordena conforme select
     switch (sortFilter.value) {
         case "recent":
             filtrados.sort((a, b) => new Date(b.DataAbertura) - new Date(a.DataAbertura));
@@ -73,5 +71,4 @@ function filtrarEOrdenar() {
 searchInput.addEventListener("input", filtrarEOrdenar);
 sortFilter.addEventListener("change", filtrarEOrdenar);
 
-// Renderiza tudo inicialmente
 renderTabela(chamados);

@@ -11,7 +11,11 @@ public enum StatusChamado
     Pendente,
     Fechado
 }
-
+public class TendenciaPorDia
+{
+    public int Abertos { get; set; }
+    public int Fechados { get; set; }
+}
 public class LogChamado
 {
     public DateTime Data { get; set; }
@@ -43,7 +47,7 @@ public class Chamado : EntidadeBase<Chamado>
         get
         {
             TimeSpan diferencaTempo = (DataFechamento ?? DateTime.Now).Subtract(DataAbertura);
-            return diferencaTempo.Days;
+            return (int)Math.Ceiling(diferencaTempo.TotalDays);
         }
     }
 

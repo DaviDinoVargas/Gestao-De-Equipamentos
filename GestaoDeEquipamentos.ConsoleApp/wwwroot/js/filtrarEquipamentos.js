@@ -56,5 +56,4 @@ function filtrarEOrdenar() {
 searchInput.addEventListener("input", filtrarEOrdenar);
 sortFilter.addEventListener("change", filtrarEOrdenar);
 
-// Renderiza tudo inicialmente
 renderTabela(equipamentos);

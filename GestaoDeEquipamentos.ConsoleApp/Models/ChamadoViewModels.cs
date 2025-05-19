@@ -212,4 +212,43 @@ public class DetalhesCompletosChamadoViewModel
         UsuariosDisponiveis = usuarios.Select(u => new SelecionarUsuarioViewModel(u.Id, u.Nome)).ToList();
         FuncionariosDisponiveis = funcionarios.Select(f => new SelecionarFuncionarioViewModel(f.Id, f.Nome)).ToList();
     }
+
+}
+public class DashboardViewModel
+{
+    public int TotalChamados { get; set; }
+    public int ChamadosAbertos { get; set; }
+    public int ChamadosPendentes { get; set; }
+    public int ChamadosFechadosUltimos30Dias { get; set; }
+    public double MediaDiasEmAberto { get; set; }
+
+
+    public class TendenciaResolucaoData
+    {
+        public int Abertos { get; set; }
+        public int Fechados { get; set; }
+    }
+
+    public Dictionary<string, TendenciaResolucaoData> TendenciaResolucao { get; set; }
+
+    public Dictionary<string, int> DistribuicaoPorStatus { get; set; }
+    public Dictionary<DateTime, int> ChamadosPorPeriodo { get; set; }
+
+    public List<ChamadoCriticoViewModel> ChamadosCriticos { get; set; }
+
+    public double TaxaResolucao { get; set; }
+    public double TempoMedioResolucao { get; set; }
+    public Dictionary<string, int> ChamadosPorResponsavel { get; set; }
+
+    public List<LogChamadoViewModel> LogsRecentes { get; set; }
+
+    public Dictionary<string, int> ChamadosPorEquipamento { get; set; }
+}
+
+public class ChamadoCriticoViewModel
+{
+    public string Titulo { get; set; }
+    public string NomeEquipamento { get; set; }
+    public int DiasEmAberto { get; set; }
+    public string NomeFuncionarioResponsavel { get; set; }
 }
