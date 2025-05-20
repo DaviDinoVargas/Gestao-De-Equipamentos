@@ -58,6 +58,8 @@ public class ControladorUsuario : Controller
     [HttpPost("editar/{id:int}")]
     public IActionResult Editar([FromRoute] int id, EditarUsuarioViewModel viewModel)
     {
+        var usuarioExistente = repositorioUsuario.SelecionarRegistroPorId(id);
+
         var usuarioEditado = viewModel.ParaEntidade();
         var erros = usuarioEditado.Validar();
 

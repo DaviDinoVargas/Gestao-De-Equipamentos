@@ -294,7 +294,7 @@ a.btn {
 }
 
 .card:nth-child(2) {
-    border-top: 5px solid #ff6384;
+    border-top: 5px solid #4bc0c0;
 }
 
 .card:nth-child(3) {
@@ -302,7 +302,7 @@ a.btn {
 }
 
 .card:nth-child(4) {
-    border-top: 5px solid #4bc0c0;
+    border-top: 5px solid #ff6384;
 }
 
 .card:nth-child(5) {

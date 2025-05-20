@@ -3,30 +3,10 @@
 
 @model CadastrarChamadoViewModel
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8" />
-    <title>Cadastro de Chamado - Gestão de Equipamentos</title>
-    <link rel="stylesheet" href="~/css/estiloCadastrarChamado.css" />
-</head>
-<body>
-    <header class="header-nav">
-        <div class="navbar">
-            <h1>Gestão de Equipamentos</h1>
-        </div>
-    </header>
-
-    <aside class="sidebar">
-        <ul>
-            <li><a href="/">Página Inicial</a></li>
-            <li><a href="/chamados/cadastrar">Cadastrar Novo Chamado</a></li>
-            <li><a href="/chamados/visualizar">Visualizar Chamados</a></li>
-        </ul>
-    </aside>
-
-    <main>
-        <div class="content">
+@{
+    Layout = "_Layout";
+}
+            <link rel="stylesheet" href="~/css/estiloCadastrarChamado.css" />
             <h2>Cadastrar Chamado</h2>
 
             <form method="post" asp-action="Cadastrar">
@@ -87,7 +67,3 @@
                 <button type="submit" class="btn btn-primary">Salvar</button>
                 <button type="button" class="btn btn-secondary" onclick="window.location.href='@Url.Action("Index", "Chamado")'">Cancelar</button>
             </form>
-        </div>
-    </main>
-</body>
-</html>

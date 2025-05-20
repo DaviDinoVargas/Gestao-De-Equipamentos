@@ -24,10 +24,10 @@
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            cutout: '60%',
+            cutout: '70%',
             plugins: {
                 legend: {
-                    position: 'right',
+                    display: false 
                 },
                 title: {
                     display: true,

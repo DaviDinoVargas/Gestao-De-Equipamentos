@@ -33,7 +33,7 @@ public class ControladorInicial : Controller
         for (int i = 29; i >= 0; i--)
         {
             var data = agora.AddDays(-i).Date;
-            var dataStr = data.ToString("yyyy-MM-dd");
+            var dataStr = data.ToString("dd-MM-yyyy");
 
             var abertos = chamados.Count(c => c.DataAbertura.Date == data);
             var fechados = chamados.Count(c => c.DataFechamento.HasValue && c.DataFechamento.Value.Date == data);

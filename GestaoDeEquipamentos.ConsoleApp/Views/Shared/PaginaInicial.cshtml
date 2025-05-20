@@ -3,17 +3,12 @@
 @using GestaoDeEquipamentos.ConsoleApp.ModuloChamado
 @using static GestaoDeEquipamentos.ConsoleApp.Models.DetalhesCompletosChamadoViewModel
 
+@{
+    Layout = "_Layout";
+}
+
 @model DashboardViewModel
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Gestão de Equipamentos</title>
-    <link rel="stylesheet" href="~/css/estilo.css" />
-    <link href="https://unpkg.com/boxicons@2.0.7/css/boxicons.min.css" rel="stylesheet" />
-</head>
-<body>
+
     <header class="header-nav">
         <div class="navbar">
             <div class="nav-container">
@@ -27,7 +22,7 @@
         </div>
     </header>
 
-    <aside class="sidebar">
+   @*  <aside class="sidebar">
         <nav>
             <ul class="sidebar-menu">
 
@@ -100,12 +95,10 @@
                 </li>
             </ul>
         </nav>
-    </aside>
+    </aside> *@
 
     <main>
-        <div class="content">
             <h2>Gestão de Equipamentos</h2>
-            <div style="height: 2000px;">
                 <h1>Dashboard de Chamados</h1>
 
                 <section class="resumo-cards">
@@ -211,10 +204,5 @@
 
                 <script src="~/js/dashboard.js"></script>
                 <script src="~/js/sidebar.js"></script>
-            </div>
-        </div>
     </main>   
    
-
-</body>
-</html>
