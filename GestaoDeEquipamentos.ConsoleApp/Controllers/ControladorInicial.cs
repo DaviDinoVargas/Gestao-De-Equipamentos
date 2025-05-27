@@ -20,7 +20,7 @@ public class ControladorInicial : Controller
 
     public IActionResult PaginaInicial()
     {
-        var chamados = repositorioChamado.SelecionarRegistros();
+        var chamados = repositorioChamado.SelecionarRegistros() ?? new List<Chamado>();
 
         var agora = DateTime.Now;
         var trintaDiasAtras = agora.AddDays(-30);
@@ -44,24 +44,14 @@ public class ControladorInicial : Controller
                 Fechados = fechados
             };
         }
+        var logsRecentes = chamados
+                .SelectMany(c => c.Logs)
+                .OrderByDescending(l => l.Data)
+                .Take(10)
+                .Select(l => new LogChamadoViewModel(l.Data, l.Acao, l.Responsavel))
+                .ToList();
 
-        var viewModel = new DashboardViewModel
-        {
-            TotalChamados = chamados.Count,
-            ChamadosAbertos = chamados.Count(c => c.Status == StatusChamado.Aberto),
-            ChamadosPendentes = chamados.Count(c => c.Status == StatusChamado.Pendente),
-            ChamadosFechadosUltimos30Dias = fechadosUltimos30Dias.Count,
-            MediaDiasEmAberto = chamados.Any() ? chamados.Average(c => c.TempoDecorrido) : 0,
-
-            DistribuicaoPorStatus = new Dictionary<string, int>
-        {
-            { "Aberto", chamados.Count(c => c.Status == StatusChamado.Aberto) },
-            { "Pendente", chamados.Count(c => c.Status == StatusChamado.Pendente) },
-            { "Fechado", chamados.Count(c => c.Status == StatusChamado.Fechado) }
-        },
-
-            TendenciaResolucao = tendenciaResolucao,
-            ChamadosCriticos = chamados
+        var chamadosCriticos = chamados
                 .Where(c => c.Status != StatusChamado.Fechado)
                 .OrderByDescending(c => c.TempoDecorrido)
                 .Take(10)
@@ -71,24 +61,46 @@ public class ControladorInicial : Controller
                     NomeEquipamento = c.Equipamento?.Nome ?? "N/A",
                     DiasEmAberto = c.TempoDecorrido,
                     NomeFuncionarioResponsavel = c.FuncionarioResponsavel?.Nome ?? "N/A"
-                }).ToList(),
+                }).ToList();
+
+        var mediaDias = chamados.Any() ? chamados.Average(c => c.TempoDecorrido) : 0;
+
+
+        var chamadosFechados = chamados
+    .Where(c => c.Status == StatusChamado.Fechado && c.DataFechamento.HasValue)
+    .ToList();
+
+        var mediaResolucao = chamadosFechados.Any()
+            ? chamadosFechados.Average(c => (c.DataFechamento.Value - c.DataAbertura).TotalDays)
+            : 0;
+
+        var viewModel = new DashboardViewModel
+        {
+            TotalChamados = chamados.Count,
+            ChamadosAbertos = chamados.Count(c => c.Status == StatusChamado.Aberto),
+            ChamadosPendentes = chamados.Count(c => c.Status == StatusChamado.Pendente),
+            ChamadosFechadosUltimos30Dias = fechadosUltimos30Dias.Count,
+            MediaDiasEmAberto = mediaDias,
+
+            DistribuicaoPorStatus = new Dictionary<string, int>
+        {
+            { "Aberto", chamados.Count(c => c.Status == StatusChamado.Aberto) },
+            { "Pendente", chamados.Count(c => c.Status == StatusChamado.Pendente) },
+            { "Fechado", chamados.Count(c => c.Status == StatusChamado.Fechado) }
+        },
+
+            TendenciaResolucao = tendenciaResolucao,
+            ChamadosCriticos = chamadosCriticos,
 
             TaxaResolucao = chamados.Any()
                 ? chamados.Count(c => c.Status == StatusChamado.Fechado) / (double)chamados.Count
                 : 0,
-            TempoMedioResolucao = chamados
-                .Where(c => c.Status == StatusChamado.Fechado && c.DataFechamento.HasValue)
-                .Average(c => (c.DataFechamento.Value - c.DataAbertura).TotalDays),
+            TempoMedioResolucao = mediaResolucao,
 
             ChamadosPorResponsavel = chamados
                 .GroupBy(c => c.FuncionarioResponsavel?.Nome ?? "Não atribuído")
                 .ToDictionary(g => g.Key, g => g.Count()),
-            LogsRecentes = chamados
-                .SelectMany(c => c.Logs)
-                .OrderByDescending(l => l.Data)
-                .Take(10)
-                .Select(l => new LogChamadoViewModel(l.Data, l.Acao, l.Responsavel))
-                .ToList(),
+            LogsRecentes = logsRecentes,
 
             ChamadosPorEquipamento = chamados
             .Where(c => c.Equipamento != null)
