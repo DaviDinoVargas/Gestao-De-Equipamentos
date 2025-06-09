@@ -3,28 +3,14 @@
 
 @model EditarChamadoViewModel
 
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="utf-8" />
-    <title>Editar Chamado - Gestão de Equipamentos</title>
-    <link rel="stylesheet" href="~/css/estiloCadastrarChamado.css" />
-</head>
+@{
+    Layout = "_Layout";
+}
 <body>
     <header class="header-nav">
         <div class="navbar">
             <h1>Gestão de Equipamentos</h1>
         </div>
-    </header>
-
-    <aside class="sidebar">
-        <ul>
-            <li><a href="/">Página Inicial</a></li>
-            <li><a href="/chamados/cadastrar">Cadastrar Novo Chamado</a></li>
-            <li><a href="/chamados/visualizar">Visualizar Chamados</a></li>
-        </ul>
-    </aside>
-
     <main>
         <div class="content">
             <h2>Edição de Chamado</h2>
@@ -83,4 +69,3 @@
         </div>
     </main>
 </body>
-</html>
